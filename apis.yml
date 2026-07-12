@@ -36,6 +36,8 @@ apis:
       about Ginnie Maes multifamily mortgage-backed securities at the security
       and loan level.
 common:
+  - type: DomainSecurity
+    url: security/ginnie-mae-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/ginnie-mae
   - type: Website
