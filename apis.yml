@@ -32,7 +32,7 @@ tags:
   - Mortgages
 url: >-
   https://raw.githubusercontent.com/api-evangelist/ginnie-mae/refs/heads/main/apis.yml
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
   - aid: ginnie-mae:ginnie-mae
     name: Ginnie Mae
