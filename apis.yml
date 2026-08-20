@@ -27,6 +27,10 @@ created: '2024-12-03'
 modified: '2026-04-28'
 position: Consumer
 tags:
+  - Federal-Government
+  - Housing
+  - Mortgages
+tags_raw:
   - Federal Government
   - Housing
   - Mortgages
@@ -37,6 +41,9 @@ apis:
   - aid: ginnie-mae:ginnie-mae
     name: Ginnie Mae
     tags:
+      - Federal-Government
+      - Housing
+    tags_raw:
       - Federal Government
       - Housing
     humanURL: https://www.ginniemae.gov
