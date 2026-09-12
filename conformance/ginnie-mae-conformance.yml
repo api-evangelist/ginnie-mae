@@ -1,0 +1,100 @@
+generated: '2026-09-12'
+method: probed
+source: >-
+  Live anonymous probes of https://www.ginniemae.gov/api/v1/ and
+  https://www.ginniemae.gov/system/menu/{main,footer}/linkset, 2026-09-12, plus the
+  published Ginnie Mae Vulnerability Disclosure Policy.
+provider: Ginnie Mae
+providerId: ginnie-mae
+description: >-
+  Cross-cutting and domain standards this provider's public API surface actually
+  declares about itself. Every entry below cites a URL that was fetched; nothing
+  is asserted from marketing prose.
+conformance:
+  - id: json:api
+    name: JSON:API 1.0
+    conforms: true
+    method: probed
+    evidence: >-
+      https://www.ginniemae.gov/api/v1/ returns HTTP 200 with a top-level
+      "jsonapi": {"version": "1.0"} member and a links object enumerating 120
+      "<entity_type>--<bundle>" resource types. Every collection response carries
+      the same jsonapi member, the media type is application/vnd.api+json, and
+      page[limit], page[offset], sort, filter, include and fields[TYPE] were each
+      verified to work on 2026-09-12.
+    spec: https://jsonapi.org/format/1.0/
+  - id: rfc9264-linkset
+    name: RFC 9264 Linkset
+    conforms: true
+    method: probed
+    evidence: >-
+      https://www.ginniemae.gov/system/menu/main/linkset and .../footer/linkset
+      return HTTP 200 with an RFC 9264 {"linkset":[{"anchor":...,"item":[...]}]}
+      document. This is the navigation contract the single-page application reads.
+    spec: https://www.rfc-editor.org/rfc/rfc9264.html
+  - id: pagination
+    name: Documented pagination
+    conforms: true
+    method: probed
+    evidence: >-
+      Two distinct paged idioms, both self-describing. JSON:API collections accept
+      page[limit] and page[offset]; the Views REST exports return a "pager" object
+      carrying current_page, items_per_page, total_pages and total_results (e.g.
+      https://www.ginniemae.gov/api/v1/press_releases, 365 results over 37 pages).
+  - id: rfc9457
+    name: RFC 9457 Problem Details
+    conforms: false
+    method: probed
+    evidence: >-
+      Errors use the JSON:API errors[] envelope, not application/problem+json.
+      https://www.ginniemae.gov/api/v1/node/faq?filter[nope]=1 returns HTTP 400
+      with {"errors":[{"title":"Bad Request","status":"400","detail":...}]}.
+  - id: oauth2
+    name: OAuth 2.0
+    conforms: false
+    method: probed
+    evidence: >-
+      The Drupal simple_oauth module is installed — the JSON:API entrypoint exposes
+      consumer--consumer, oauth2_scope--oauth2_scope and oauth2_token--* resource
+      types — but no authorization surface is published: /.well-known/oauth-authorization-server,
+      /.well-known/openid-configuration and /oauth/token all return the Angular
+      single-page-application shell (HTTP 200, text/html) rather than metadata, and
+      the oauth2_scope collection returns an empty data array to an anonymous caller.
+      The public content surface requires no credential at all.
+  - id: idempotency
+    name: Idempotency keys
+    conforms: false
+    method: derived
+    evidence: >-
+      Not applicable — no write operation is exposed or attempted on the public
+      surface. See conventions/ginnie-mae-conventions.yml.
+  - id: cisa-bod-20-01
+    name: CISA Binding Operational Directive 20-01 (federal vulnerability disclosure policy)
+    conforms: true
+    method: searched
+    evidence: >-
+      https://www.ginniemae.gov/site-policies/ginnie-mae-vulnerability-disclosure-policy
+      (HTTP 200) publishes a BOD 20-01-shaped VDP: scope *.ginniemae.gov, an
+      authorization/safe-harbour clause, prohibited test methods, a reporting address
+      (ginniemaevdp@hud.gov), anonymous reports accepted, and a three-business-day
+      acknowledgement commitment. Content read via the site's own API at
+      https://www.ginniemae.gov/api/v1/node/web_page/0a8f5c06-6e9f-4b49-a3a7-13c61fadd98a.
+    spec: https://www.cisa.gov/news-events/directives/bod-20-01-develop-and-publish-vulnerability-disclosure-policy
+domain_standards:
+  - id: none-declared
+    name: No mortgage-securities domain standard is declared by the contract
+    conforms: false
+    method: derived
+    evidence: >-
+      REWARD-ONLY check, recorded as an honest absence. The surface described here
+      is a content API, so there is no place in it for a securitisation or mortgage
+      data standard to appear. Ginnie Mae's MBS disclosure is distributed as
+      fixed-width and delimited bulk files with published layouts
+      (https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files),
+      not as MISMO, FIX, ISO 20022 or any other declared message type, and no
+      machine-readable contract for those files was found.
+notes:
+  - >-
+    robots.txt at https://www.ginniemae.gov/robots.txt carries "Disallow: /api/".
+    The surface is unauthenticated and openly reachable, but it is a crawler
+    directive worth recording next to any claim that the API is "published".

@@ -1,0 +1,144 @@
+generated: '2026-09-12'
+method: probed
+source: >-
+  Derived from openapi/ginnie-mae-content-api-openapi.yml and confirmed against live
+  anonymous responses from https://www.ginniemae.gov/api/v1/, 2026-09-12.
+provider: Ginnie Mae
+providerId: ginnie-mae
+description: >-
+  Cross-cutting runtime semantics of the Ginnie Mae Content API. The provider
+  documents none of this; every statement below was observed on the wire.
+auth:
+  style: none
+  detail: >-
+    No credential is accepted or required on the public surface. See
+    authentication/ginnie-mae-authentication.yml.
+media_types:
+  request: null
+  response:
+    - application/vnd.api+json   # JSON:API resource endpoints
+    - application/json           # Views REST exports and linksets
+  note: >-
+    The JSON:API endpoints answer application/vnd.api+json regardless of the Accept
+    header sent; the Views exports answer application/json.
+pagination:
+  styles:
+    - name: JSON:API offset pagination
+      applies_to: 'all /api/v1/<entity>/<bundle> collections'
+      params:
+        - 'page[limit]'
+        - 'page[offset]'
+      response_fields:
+        - links.next
+        - links.self
+      verified: '2026-09-12'
+    - name: Views pager envelope
+      applies_to: '/api/v1/search/results, /api/v1/faq, /api/v1/faq/categories, /api/v1/press_releases'
+      params:
+        - page
+        - items_per_page
+      response_fields:
+        - pager.current_page
+        - pager.items_per_page
+        - pager.total_pages
+        - pager.total_results
+      verified: '2026-09-12'
+      note: >-
+        Unusually generous for an undocumented surface: the response states the total
+        result count and page count, so an agent can size a crawl before starting it.
+filtering:
+  style: 'JSON:API filter[] + Views exposed filters'
+  detail: >-
+    JSON:API collections accept both the shorthand filter[<field>]=<value> and the
+    expanded filter[<name>][value] / [operator] / [path] form; an unknown field is
+    rejected with HTTP 400 and a named detail message. The Views exports publish
+    their own accepted filter names in a top-level "filters" array on every
+    response — for example /api/v1/press_releases declares
+    ["keywords","month","year","sort_by","sort_order"]. That is the closest thing
+    this surface has to documentation, and it is machine-readable.
+  verified: '2026-09-12'
+sparse_fieldsets:
+  supported: true
+  param: 'fields[<resource-type>]'
+  example: '/api/v1/node/press_releases?fields[node--press_releases]=title'
+  verified: '2026-09-12'
+expansion:
+  supported: true
+  param: include
+  detail: >-
+    Standard JSON:API relationship side-loading into the "included" member. Note that
+    this site runs JSON:API Extras with field enhancement, so resource attributes are
+    flattened onto the resource object instead of nested under "attributes", and
+    entity reference fields appear as inline {type, id, meta} objects rather than a
+    populated "relationships" member. A consumer written against vanilla JSON:API
+    will not find data.attributes here.
+sorting:
+  supported: true
+  param: sort
+  detail: 'Comma-separated field list; a leading "-" reverses (e.g. sort=-created).'
+  verified: '2026-09-12'
+versioning:
+  scheme: path
+  current: v1
+  detail: >-
+    The API base is /api/v1. No version negotiation header, no dated version, no
+    published policy. Individual resources additionally support a resourceVersion
+    query value of id:<vid> or rel:working-copy, advertised by each resource object's
+    own links member — a per-record revision selector, not an API version.
+request_id:
+  header: null
+  detail: >-
+    No request-correlation header is returned. Responses carry akamai-grn (an Akamai
+    edge reference) and server-timing, which identify the edge transaction, not the
+    application request.
+error_envelope:
+  shape: 'JSON:API errors[]'
+  fields: [title, status, detail, links.via, links.info]
+  detail: >-
+    See errors/ginnie-mae-problem-types.yml. Note the inconsistency: a bad query
+    against a valid resource type returns a JSON:API error document, but an unknown
+    resource type returns Drupal's HTML 404 page.
+rate_limit_signaling:
+  headers: []
+  detail: >-
+    No RateLimit-*, X-RateLimit-* or Retry-After header is returned on a 200. No
+    limit is published. See rate-limits/ginnie-mae-rate-limits.yml.
+caching:
+  headers:
+    - 'cache-control: private, no-cache, must-revalidate'
+    - x-drupal-cache
+    - x-drupal-dynamic-cache
+    - 'server-timing: cdn-cache'
+  detail: >-
+    Fronted by Akamai. Drupal reports its own cache hit/miss state in
+    x-drupal-cache and x-drupal-dynamic-cache; the application sets
+    cache-control: private, no-cache, so a client cannot safely reuse a response
+    without revalidating.
+idempotency:
+  coverage: na
+  mechanism: none
+  scope: []
+  detail: >-
+    NOT APPLICABLE, not absent. No write operation is exposed on the public surface
+    and none was attempted against a live U.S. government system, so there is no
+    mutating surface for a replay-protection mechanism to cover. JSON:API defines
+    POST/PATCH/DELETE on these URLs and Drupal implements them for authorised
+    clients, but whether Ginnie Mae enables them, and under what semantics, is
+    unverified and is not asserted here.
+reversibility:
+  grade: na
+  detail: >-
+    NOT APPLICABLE for the same reason as idempotency — this is a read-only public
+    surface. There is no action an agent can take through it that would need taking
+    back.
+  operations: []
+dry_run_mode:
+  supported: na
+  detail: 'Not applicable — read-only surface.'
+cross_links:
+  errors: errors/ginnie-mae-problem-types.yml
+  lifecycle: lifecycle/ginnie-mae-lifecycle.yml
+  authentication: authentication/ginnie-mae-authentication.yml
+  rate_limits: rate-limits/ginnie-mae-rate-limits.yml
+  conformance: conformance/ginnie-mae-conformance.yml
+  data_model: data-model/ginnie-mae-data-model.yml

@@ -1,0 +1,43 @@
+generated: '2026-09-12'
+method: generated
+source: openapi/ginnie-mae-content-api-openapi.yml
+provider: Ginnie Mae
+providerId: ginnie-mae
+description: Packaged Agent Skills for the Ginnie Mae Content API. AUTHORED BY API EVANGELIST, not by
+  Ginnie Mae — the agency publishes no skills, no AGENTS.md and no documentation for this API. Every operationId
+  referenced was verified to exist in the OpenAPI in openapi/, and every endpoint in that OpenAPI returned
+  HTTP 200 to an anonymous GET on 2026-09-12.
+skill_count: 2
+skills:
+- file: ginnie-mae-answer-from-official-sources.md
+  name: ginnie-mae-answer-from-official-sources
+  description: Answer a question about Ginnie Mae — a program rule, a term of art, a policy change — from
+    Ginnie Mae's own published text rather than from memory, using the agency's public JSON:API content
+    surface. Use when someone asks what Ginnie Mae's position, definition or requirement actually is and
+    the answer must be citable.
+  api: ginnie-mae:ginnie-mae-content-api
+  operations:
+  - searchSite
+  - listFaqs
+  - listFaqCategories
+  - listFaqSubcategories
+  - listGlossaryTerms
+  - listNodeMemorandum
+  - getNodeMemorandum
+  - listMediaDocumentFile
+  - getFileFile
+- file: ginnie-mae-navigate-disclosure-data.md
+  name: ginnie-mae-navigate-disclosure-data
+  description: Find out which Ginnie Mae MBS disclosure file answers a question, and what its record layout
+    is, before trying to download anything. Use when someone needs pool-level, loan-level, HMBS, Multifamily,
+    REMIC or Platinum disclosure data and needs to know which file to ask for and how it is structured.
+  api: ginnie-mae:ginnie-mae-content-api
+  operations:
+  - listNodeDataFileTypes
+  - getNodeDataFileTypes
+  - listMediaDisclosureDataFile
+  - getMediaDisclosureDataFile
+  - getFileFile
+  - searchSite
+  - listBulkNotifications
+  - getMenuLinkset

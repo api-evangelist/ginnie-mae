@@ -1,0 +1,240 @@
+generated: '2026-09-12'
+method: probed
+source: Direct anonymous HTTPS probes of each named /.well-known path on every host this record knows,
+  2026-09-12.
+provider: Ginnie Mae
+providerId: ginnie-mae
+description: 'Well-known document probe for Ginnie Mae. RESULT: NOTHING IS SERVED. Ginnie Mae publishes
+  no security.txt, no OAuth or OpenID metadata, no api-catalog, no ai-plugin and no agent card on any
+  of its hosts. No WellKnown, SecurityTxt or AgentCard pointer is wired into apis.yml as a result — this
+  file records a measured absence, not a surface.'
+result: none-served
+hosts:
+- host: www.ginniemae.gov
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/api-catalog
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/agent.json
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/aauth-resource.json
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+- host: ginniemae.gov
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/api-catalog
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/agent.json
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/aauth-resource.json
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+- host: bulk.ginniemae.gov
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/api-catalog
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/agent.json
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/aauth-resource.json
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+- host: my.ginniemae.gov
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/api-catalog
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/agent.json
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+  - path: /.well-known/aauth-resource.json
+    status: 200
+    file: null
+    note: HTTP 200 but the body is the Angular single-page-application shell (text/html), not a document.
+      Recorded as a MISS.
+- host: access.ginniemae.gov
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+  - path: /.well-known/aauth-resource.json
+    status: 404
+    file: null
+false_positive_warning: Four of the five hosts answer HTTP 200 to EVERY /.well-known path because www.ginniemae.gov,
+  ginniemae.gov, bulk.ginniemae.gov and my.ginniemae.gov serve single-page applications with a catch-all
+  route. A status-code-only probe of this provider would record nine served documents on each of four
+  hosts — thirty-six documents that do not exist. Every 200 here was opened and found to be the same Angular
+  index page. access.ginniemae.gov, which is an Oracle Access Manager login rather than an SPA, returns
+  an honest 404 on all nine.
+recommendation: 'A security.txt is the cheapest win available: Ginnie Mae already publishes a CISA BOD
+  20-01 vulnerability disclosure policy with a contact address (ginniemaevdp@hud.gov), a scope and a three-business-day
+  acknowledgement commitment at https://www.ginniemae.gov/site-policies/ginnie-mae-vulnerability-disclosure-policy.
+  Serving those same facts as an RFC 9116 file at /.well-known/security.txt would make the policy discoverable
+  by the scanners and researchers that look there first.'

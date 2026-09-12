@@ -3,88 +3,66 @@ specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
 provider: Ginnie Mae
 providerId: ginnie-mae
+generated: '2026-09-12'
+method: probed
+source: >-
+  Live anonymous responses from https://www.ginniemae.gov/api/v1/ observed
+  2026-09-12, plus a search of ginniemae.gov for any published limit.
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
+modified: '2026-09-12'
+# SUPERSEDED 2026-09-12. Every previous version of this file was a bulk-sweep scaffold
+# dated 2026-05-04 that invented free / professional / enterprise tiers, per-minute
+# ceilings, burst allowances and X-RateLimit-* headers for a provider that publishes
+# none of them and issues no API keys. Those values were never Ginnie Mae's. They have
+# been removed and replaced with what was actually observed on the wire.
 tags:
   - Federal Government
   - Housing
   - Mortgages
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Ginnie Mae API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
+description: >-
+  Ginnie Mae publishes no rate limit for its public JSON:API content surface and
+  returns no rate-limit signal in its responses. An agent calling this API has no
+  runtime feedback of any kind about how much it may consume.
+limit_count: 0
+published_limits: false
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
-responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
-limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Ginnie Mae
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Ginnie Mae
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Ginnie Mae
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Ginnie Mae
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Ginnie Mae
-policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  limit: null
+  remaining: null
+  reset: null
+  retryAfter: null
+  policy: null
+headers_observed: []
+response_codes:
+  throttled: null
+  observed_429: false
+limits: []
+policies: []
+evidence:
+  - observation: >-
+      Full response header set captured from GET
+      https://www.ginniemae.gov/api/v1/node/press_releases?page[limit]=1 on 2026-09-12.
+      Headers returned: content-type, server (nginx/1.30.4), x-powered-by (PHP/8.4.23),
+      x-drupal-dynamic-cache, content-language, x-content-type-options, x-frame-options,
+      x-generator (Drupal 10), x-consumer-id (default_consumer), x-drupal-cache,
+      cache-control, expires, date, content-length, set-cookie (AWSALB/AWSALBCORS),
+      server-timing, alt-svc, strict-transport-security, akamai-grn. No RateLimit-*,
+      no X-RateLimit-*, no Retry-After.
+  - observation: >-
+      Approximately 140 sequential anonymous GETs were issued across the 120 JSON:API
+      collections and the Views exports over roughly three minutes on 2026-09-12. Every
+      one returned HTTP 200. No 429, no 503, no throttling and no degradation was seen.
+      This establishes that no limit bites at that rate; it establishes nothing about
+      where a limit might exist.
+  - observation: >-
+      No pricing, plans, quota or fair-use page exists on ginniemae.gov, and the site
+      issues no API keys, so there is no tier for a limit to attach to.
+note: >-
+  The absence of a signal is itself the finding. Akamai fronts this origin, so an edge
+  protection almost certainly exists; it is simply not expressed to the caller in any
+  header, which means a well-behaved client cannot back off before it is cut off. If
+  Ginnie Mae wanted one improvement here it would be emitting RFC 9021-style
+  RateLimit-Limit / RateLimit-Remaining / RateLimit-Reset headers on this surface.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

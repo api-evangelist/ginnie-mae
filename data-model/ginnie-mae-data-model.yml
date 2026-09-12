@@ -1,0 +1,449 @@
+generated: '2026-09-12'
+method: derived
+source: openapi/ginnie-mae-content-api-openapi.yml + live anonymous sampling of https://www.ginniemae.gov/api/v1/
+  resource objects, 2026-09-12
+provider: Ginnie Mae
+providerId: ginnie-mae
+description: Entity-relationship graph of the Ginnie Mae Content API. Ginnie Mae publishes no object reference,
+  so the graph was derived by fetching one resource object from each collection and reading the inline
+  {type, id} reference objects it returns. Because the site runs JSON:API Extras with field enhancement,
+  references appear as flattened inline objects rather than in a JSON:API "relationships" member — every
+  edge below is the field name as it actually appears on the wire.
+identifier_scheme:
+  primary: UUID v4 in the "id" member of every resource object
+  secondary: drupal_internal__nid / drupal_internal__tid / drupal_internal__mid — the integer key, also
+    exposed and filterable
+  revision: drupal_internal__vid, selectable per request with ?resourceVersion=id:<vid> or rel:working-copy
+resource_type_count: 68
+sampled_type_count: 22
+entities:
+- id: file--file
+  endpoint: /api/v1/file/file
+  field_count: 10
+  sampled: true
+- id: media--disclosure_data_file
+  endpoint: /api/v1/media/disclosure_data_file
+  field_count: 22
+  sampled: true
+- id: media--document_file
+  endpoint: /api/v1/media/document_file
+  field_count: 23
+  sampled: true
+- id: media--image
+  endpoint: /api/v1/media/image
+  field_count: 19
+  sampled: true
+- id: media--mbs_guide
+  endpoint: /api/v1/media/mbs_guide
+  field_count: 24
+  sampled: true
+- id: media--remic_mir
+  endpoint: /api/v1/media/remic_mir
+  field_count: 22
+  sampled: true
+- id: node--data_file_types
+  endpoint: /api/v1/node/data_file_types
+  field_count: 43
+  sampled: true
+- id: node--event
+  endpoint: /api/v1/node/event
+  field_count: 35
+  sampled: true
+- id: node--executive_leadership
+  endpoint: /api/v1/node/executive_leadership
+  field_count: 0
+  sampled: false
+  note: Collection is reachable (HTTP 200) but returned no rows to an anonymous caller on 2026-09-12,
+    so its field set could not be sampled.
+- id: node--faq
+  endpoint: /api/v1/node/faq
+  field_count: 33
+  sampled: true
+- id: node--glossary
+  endpoint: /api/v1/node/glossary
+  field_count: 30
+  sampled: true
+- id: node--haps
+  endpoint: /api/v1/node/haps
+  field_count: 34
+  sampled: true
+- id: node--impact_area_items
+  endpoint: /api/v1/node/impact_area_items
+  field_count: 32
+  sampled: true
+- id: node--memorandum
+  endpoint: /api/v1/node/memorandum
+  field_count: 27
+  sampled: true
+- id: node--participants
+  endpoint: /api/v1/node/participants
+  field_count: 40
+  sampled: true
+- id: node--person
+  endpoint: /api/v1/node/person
+  field_count: 33
+  sampled: true
+- id: node--press_releases
+  endpoint: /api/v1/node/press_releases
+  field_count: 23
+  sampled: true
+- id: node--remote_video
+  endpoint: /api/v1/node/remote_video
+  field_count: 31
+  sampled: true
+- id: node--speeches
+  endpoint: /api/v1/node/speeches
+  field_count: 0
+  sampled: false
+  note: Collection is reachable (HTTP 200) but returned no rows to an anonymous caller on 2026-09-12,
+    so its field set could not be sampled.
+- id: node--training_announcement
+  endpoint: /api/v1/node/training_announcement
+  field_count: 28
+  sampled: true
+- id: node--web_page
+  endpoint: /api/v1/node/web_page
+  field_count: 24
+  sampled: true
+- id: paragraph--accordion
+  endpoint: /api/v1/paragraph/accordion
+  field_count: 14
+  sampled: true
+- id: taxonomy_term--category
+  endpoint: /api/v1/taxonomy_term/category
+  field_count: 16
+  sampled: true
+- id: taxonomy_term--faq_category
+  endpoint: /api/v1/taxonomy_term/faq_category
+  field_count: 16
+  sampled: true
+relationships:
+- from: file--file
+  via: uid
+  to: user--user
+  type: has_one
+- from: media--disclosure_data_file
+  via: bundle
+  to: media_type--media_type
+  type: has_one
+- from: media--disclosure_data_file
+  via: uid
+  to: user--user
+  type: has_one
+- from: media--disclosure_data_file
+  via: thumbnail
+  to: file--file
+  type: has_one
+- from: media--disclosure_data_file
+  via: field_media_file
+  to: file--file
+  type: has_one
+- from: media--disclosure_data_file
+  via: field_secondary_file
+  to: file--file
+  type: has_one
+- from: media--document_file
+  via: bundle
+  to: media_type--media_type
+  type: has_one
+- from: media--document_file
+  via: uid
+  to: user--user
+  type: has_one
+- from: media--document_file
+  via: thumbnail
+  to: file--file
+  type: has_one
+- from: media--document_file
+  via: field_media_file
+  to: file--file
+  type: has_one
+- from: media--image
+  via: bundle
+  to: media_type--media_type
+  type: has_one
+- from: media--image
+  via: uid
+  to: user--user
+  type: has_one
+- from: media--image
+  via: thumbnail
+  to: file--file
+  type: has_one
+- from: media--image
+  via: field_media_image
+  to: file--file
+  type: has_one
+- from: media--mbs_guide
+  via: bundle
+  to: media_type--media_type
+  type: has_one
+- from: media--mbs_guide
+  via: uid
+  to: user--user
+  type: has_one
+- from: media--mbs_guide
+  via: thumbnail
+  to: file--file
+  type: has_one
+- from: media--mbs_guide
+  via: field_media_file
+  to: file--file
+  type: has_one
+- from: media--remic_mir
+  via: bundle
+  to: media_type--media_type
+  type: has_one
+- from: media--remic_mir
+  via: uid
+  to: user--user
+  type: has_one
+- from: media--remic_mir
+  via: thumbnail
+  to: file--file
+  type: has_one
+- from: media--remic_mir
+  via: field_media_file
+  to: file--file
+  type: has_one
+- from: node--data_file_types
+  via: node_type
+  to: node_type--node_type
+  type: has_one
+- from: node--data_file_types
+  via: revision_uid
+  to: user--user
+  type: has_one
+- from: node--data_file_types
+  via: uid
+  to: user--user
+  type: has_one
+- from: node--data_file_types
+  via: field_file_layout
+  to: media--disclosure_data_file
+  type: has_one
+- from: node--event
+  via: node_type
+  to: node_type--node_type
+  type: has_one
+- from: node--event
+  via: revision_uid
+  to: user--user
+  type: has_one
+- from: node--event
+  via: uid
+  to: user--user
+  type: has_one
+- from: node--faq
+  via: node_type
+  to: node_type--node_type
+  type: has_one
+- from: node--faq
+  via: revision_uid
+  to: user--user
+  type: has_one
+- from: node--faq
+  via: uid
+  to: user--user
+  type: has_one
+- from: node--faq
+  via: field_faq_category
+  to: taxonomy_term--faq_category
+  type: has_one
+- from: node--glossary
+  via: node_type
+  to: node_type--node_type
+  type: has_one
+- from: node--glossary
+  via: revision_uid
+  to: user--user
+  type: has_one
+- from: node--glossary
+  via: uid
+  to: user--user
+  type: has_one
+- from: node--haps
+  via: node_type
+  to: node_type--node_type
+  type: has_one
+- from: node--haps
+  via: revision_uid
+  to: user--user
+  type: has_one
+- from: node--haps
+  via: uid
+  to: user--user
+  type: has_one
+- from: node--haps
+  via: field_contributors
+  to: node--haps_contributor
+  type: has_many
+- from: node--haps
+  via: field_featured_media
+  to: media--image
+  type: has_many
+- from: node--haps
+  via: field_related_articles
+  to: node--haps
+  type: has_many
+- from: node--impact_area_items
+  via: node_type
+  to: node_type--node_type
+  type: has_one
+- from: node--impact_area_items
+  via: revision_uid
+  to: user--user
+  type: has_one
+- from: node--impact_area_items
+  via: uid
+  to: user--user
+  type: has_one
+- from: node--impact_area_items
+  via: field_sub_item_image
+  to: media--image
+  type: has_one
+- from: node--memorandum
+  via: node_type
+  to: node_type--node_type
+  type: has_one
+- from: node--memorandum
+  via: revision_uid
+  to: user--user
+  type: has_one
+- from: node--memorandum
+  via: uid
+  to: user--user
+  type: has_one
+- from: node--memorandum
+  via: field_featured_media
+  to: media--document_file
+  type: has_many
+- from: node--participants
+  via: node_type
+  to: node_type--node_type
+  type: has_one
+- from: node--participants
+  via: revision_uid
+  to: user--user
+  type: has_one
+- from: node--participants
+  via: uid
+  to: user--user
+  type: has_one
+- from: node--person
+  via: node_type
+  to: node_type--node_type
+  type: has_one
+- from: node--person
+  via: revision_uid
+  to: user--user
+  type: has_one
+- from: node--person
+  via: uid
+  to: user--user
+  type: has_one
+- from: node--person
+  via: field_headshot
+  to: media--image
+  type: has_one
+- from: node--press_releases
+  via: node_type
+  to: node_type--node_type
+  type: has_one
+- from: node--press_releases
+  via: uid
+  to: user--user
+  type: has_one
+- from: node--remote_video
+  via: node_type
+  to: node_type--node_type
+  type: has_one
+- from: node--remote_video
+  via: revision_uid
+  to: user--user
+  type: has_one
+- from: node--remote_video
+  via: uid
+  to: user--user
+  type: has_one
+- from: node--remote_video
+  via: field_categories
+  to: taxonomy_term--podcast_categories
+  type: has_many
+- from: node--remote_video
+  via: field_featured_media
+  to: media--remote_video
+  type: has_many
+- from: node--training_announcement
+  via: node_type
+  to: node_type--node_type
+  type: has_one
+- from: node--training_announcement
+  via: revision_uid
+  to: user--user
+  type: has_one
+- from: node--training_announcement
+  via: uid
+  to: user--user
+  type: has_one
+- from: node--training_announcement
+  via: field_event_details
+  to: paragraph--event
+  type: has_many
+- from: node--training_announcement
+  via: field_featured_media
+  to: media--document_file
+  type: has_many
+- from: node--web_page
+  via: node_type
+  to: node_type--node_type
+  type: has_one
+- from: node--web_page
+  via: field_featured_media
+  to: media--image
+  type: has_many
+- from: paragraph--accordion
+  via: paragraph_type
+  to: paragraphs_type--paragraphs_type
+  type: has_one
+- from: taxonomy_term--category
+  via: vid
+  to: taxonomy_vocabulary--taxonomy_vocabulary
+  type: has_one
+- from: taxonomy_term--category
+  via: parent
+  to: taxonomy_term--category
+  type: has_many
+- from: taxonomy_term--faq_category
+  via: vid
+  to: taxonomy_vocabulary--taxonomy_vocabulary
+  type: has_one
+- from: taxonomy_term--faq_category
+  via: parent
+  to: taxonomy_term--faq_category
+  type: has_many
+notable_edges:
+- edge: node--data_file_types -> media--disclosure_data_file (field_file_layout)
+  why: 'This is the bridge between the website content estate and the MBS disclosure product: each disclosure
+    data file type points at the published file-layout document that describes its fixed-width record
+    structure. It is the closest thing Ginnie Mae publishes to a machine-navigable schema catalogue for
+    its bulk disclosure files.'
+- edge: node--memorandum -> media--document_file (field_featured_media)
+  why: All Participant Memoranda, MBS Program Memoranda and bulletins carry their PDF attachment as a
+    media reference, so the full APM corpus and its documents are traversable in two hops from the collection
+    endpoint.
+- edge: node--haps -> node--haps (field_related_articles) and -> node--haps_contributor (field_contributors)
+  why: The research blog is a self-referential graph with a separate contributor entity — a real authorship
+    model, not free text.
+- edge: media--* -> file--file (field_media_file / field_media_image / thumbnail)
+  why: Every document and image resolves to a file entity carrying the download URI, which is how an agent
+    gets from a memorandum to the actual PDF.
+omitted:
+  types:
+  - administrative and configuration entity types (view--view, field_config--field_config, entity_form_display--*,
+    and similar)
+  - identity and OAuth entity types (user--user, consumer--consumer, oauth2_token--*)
+  reason: Drupal implementation surface rather than published data. user--user is additionally excluded
+    because the collection returns CMS account display names to anonymous callers; it is recorded here
+    as an observation about the surface, and no personal data from it is stored in this repository.
+render: null

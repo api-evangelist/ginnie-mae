@@ -1,0 +1,602 @@
+{
+ "action--action": {
+  "href": "https://www.ginniemae.gov/api/v1/action/action",
+  "status": 200,
+  "data": 0
+ },
+ "base_field_override--base_field_override": {
+  "href": "https://www.ginniemae.gov/api/v1/base_field_override/base_field_override",
+  "status": 200,
+  "data": 0
+ },
+ "block--block": {
+  "href": "https://www.ginniemae.gov/api/v1/block/block",
+  "status": 200,
+  "data": 1
+ },
+ "block_content--slideshow_block": {
+  "href": "https://www.ginniemae.gov/api/v1/block_content/slideshow_block",
+  "status": 200,
+  "data": 1
+ },
+ "block_content--slideshow_sub": {
+  "href": "https://www.ginniemae.gov/api/v1/block_content/slideshow_sub",
+  "status": 200,
+  "data": 1
+ },
+ "block_content_type--block_content_type": {
+  "href": "https://www.ginniemae.gov/api/v1/block_content_type/block_content_type",
+  "status": 200,
+  "data": 0
+ },
+ "config_split--config_split": {
+  "href": "https://www.ginniemae.gov/api/v1/config_split/config_split",
+  "status": 200,
+  "data": 0
+ },
+ "consumer--consumer": {
+  "href": "https://www.ginniemae.gov/api/v1/consumer/consumer",
+  "status": 200,
+  "data": 0
+ },
+ "custom_breadcrumbs--custom_breadcrumbs": {
+  "href": "https://www.ginniemae.gov/api/v1/custom_breadcrumbs/custom_breadcrumbs",
+  "status": 200,
+  "data": 0
+ },
+ "date_format--date_format": {
+  "href": "https://www.ginniemae.gov/api/v1/date_format/date_format",
+  "status": 200,
+  "data": 1
+ },
+ "editor--editor": {
+  "href": "https://www.ginniemae.gov/api/v1/editor/editor",
+  "status": 200,
+  "data": 0
+ },
+ "entity_form_display--entity_form_display": {
+  "href": "https://www.ginniemae.gov/api/v1/entity_form_display/entity_form_display",
+  "status": 200,
+  "data": 0
+ },
+ "entity_form_mode--entity_form_mode": {
+  "href": "https://www.ginniemae.gov/api/v1/entity_form_mode/entity_form_mode",
+  "status": 200,
+  "data": 0
+ },
+ "entity_queue--entity_queue": {
+  "href": "https://www.ginniemae.gov/api/v1/entity_queue/entity_queue",
+  "status": 200,
+  "data": 1
+ },
+ "entity_subqueue--bulk_notifications": {
+  "href": "https://www.ginniemae.gov/api/v1/entity_subqueue/bulk_notifications",
+  "status": 200,
+  "data": 1
+ },
+ "entity_subqueue--executive_leadership_sort": {
+  "href": "https://www.ginniemae.gov/api/v1/entity_subqueue/executive_leadership_sort",
+  "status": 200,
+  "data": 1
+ },
+ "entity_subqueue--homepage_impact_area": {
+  "href": "https://www.ginniemae.gov/api/v1/entity_subqueue/homepage_impact_area",
+  "status": 200,
+  "data": 1
+ },
+ "entity_subqueue--homepage_mission_area": {
+  "href": "https://www.ginniemae.gov/api/v1/entity_subqueue/homepage_mission_area",
+  "status": 200,
+  "data": 1
+ },
+ "entity_subqueue--homepage_notifications": {
+  "href": "https://www.ginniemae.gov/api/v1/entity_subqueue/homepage_notifications",
+  "status": 200,
+  "data": 1
+ },
+ "entity_subqueue--slideshow": {
+  "href": "https://www.ginniemae.gov/api/v1/entity_subqueue/slideshow",
+  "status": 200,
+  "data": 1
+ },
+ "entity_view_display--entity_view_display": {
+  "href": "https://www.ginniemae.gov/api/v1/entity_view_display/entity_view_display",
+  "status": 200,
+  "data": 0
+ },
+ "entity_view_mode--entity_view_mode": {
+  "href": "https://www.ginniemae.gov/api/v1/entity_view_mode/entity_view_mode",
+  "status": 200,
+  "data": 0
+ },
+ "field_config--field_config": {
+  "href": "https://www.ginniemae.gov/api/v1/field_config/field_config",
+  "status": 200,
+  "data": 0
+ },
+ "field_storage_config--field_storage_config": {
+  "href": "https://www.ginniemae.gov/api/v1/field_storage_config/field_storage_config",
+  "status": 200,
+  "data": 0
+ },
+ "file--file": {
+  "href": "https://www.ginniemae.gov/api/v1/file/file",
+  "status": 200,
+  "data": 1
+ },
+ "filter_format--filter_format": {
+  "href": "https://www.ginniemae.gov/api/v1/filter_format/filter_format",
+  "status": 200,
+  "data": 0
+ },
+ "image_style--image_style": {
+  "href": "https://www.ginniemae.gov/api/v1/image_style/image_style",
+  "status": 200,
+  "data": 0
+ },
+ "jsonapi_resource_config--jsonapi_resource_config": {
+  "href": "https://www.ginniemae.gov/api/v1/jsonapi_resource_config/jsonapi_resource_config",
+  "status": 200,
+  "data": 0
+ },
+ "media--disclosure_data_file": {
+  "href": "https://www.ginniemae.gov/api/v1/media/disclosure_data_file",
+  "status": 200,
+  "data": 1
+ },
+ "media--document_file": {
+  "href": "https://www.ginniemae.gov/api/v1/media/document_file",
+  "status": 200,
+  "data": 1
+ },
+ "media--image": {
+  "href": "https://www.ginniemae.gov/api/v1/media/image",
+  "status": 200,
+  "data": 1
+ },
+ "media--listing_page": {
+  "href": "https://www.ginniemae.gov/api/v1/media/listing_page",
+  "status": 200,
+  "data": 1
+ },
+ "media--mbs_guide": {
+  "href": "https://www.ginniemae.gov/api/v1/media/mbs_guide",
+  "status": 200,
+  "data": 1
+ },
+ "media--qrc": {
+  "href": "https://www.ginniemae.gov/api/v1/media/qrc",
+  "status": 200,
+  "data": 1
+ },
+ "media--remic_mir": {
+  "href": "https://www.ginniemae.gov/api/v1/media/remic_mir",
+  "status": 200,
+  "data": 1
+ },
+ "media--remote_video": {
+  "href": "https://www.ginniemae.gov/api/v1/media/remote_video",
+  "status": 200,
+  "data": 1
+ },
+ "media--training_recordings": {
+  "href": "https://www.ginniemae.gov/api/v1/media/training_recordings",
+  "status": 200,
+  "data": 1
+ },
+ "media_type--media_type": {
+  "href": "https://www.ginniemae.gov/api/v1/media_type/media_type",
+  "status": 200,
+  "data": 1
+ },
+ "menu--menu": {
+  "href": "https://www.ginniemae.gov/api/v1/menu/menu",
+  "status": 200,
+  "data": 1
+ },
+ "menu_link_content--menu_link_content": {
+  "href": "https://www.ginniemae.gov/api/v1/menu_link_content/menu_link_content",
+  "status": 200,
+  "data": 0
+ },
+ "metatag_defaults--metatag_defaults": {
+  "href": "https://www.ginniemae.gov/api/v1/metatag_defaults/metatag_defaults",
+  "status": 200,
+  "data": 0
+ },
+ "migration--migration": {
+  "href": "https://www.ginniemae.gov/api/v1/migration/migration",
+  "status": 200,
+  "data": 0
+ },
+ "migration_group--migration_group": {
+  "href": "https://www.ginniemae.gov/api/v1/migration_group/migration_group",
+  "status": 200,
+  "data": 0
+ },
+ "node--data_file_types": {
+  "href": "https://www.ginniemae.gov/api/v1/node/data_file_types",
+  "status": 200,
+  "data": 1
+ },
+ "node--event": {
+  "href": "https://www.ginniemae.gov/api/v1/node/event",
+  "status": 200,
+  "data": 1
+ },
+ "node--executive_leadership": {
+  "href": "https://www.ginniemae.gov/api/v1/node/executive_leadership",
+  "status": 200,
+  "data": 0
+ },
+ "node--faq": {
+  "href": "https://www.ginniemae.gov/api/v1/node/faq",
+  "status": 200,
+  "data": null
+ },
+ "node--glossary": {
+  "href": "https://www.ginniemae.gov/api/v1/node/glossary",
+  "status": 200,
+  "data": 1
+ },
+ "node--haps": {
+  "href": "https://www.ginniemae.gov/api/v1/node/haps",
+  "status": 200,
+  "data": null
+ },
+ "node--haps_contributor": {
+  "href": "https://www.ginniemae.gov/api/v1/node/haps_contributor",
+  "status": 200,
+  "data": 1
+ },
+ "node--hello_bar_notification": {
+  "href": "https://www.ginniemae.gov/api/v1/node/hello_bar_notification",
+  "status": 200,
+  "data": 0
+ },
+ "node--impact_area_items": {
+  "href": "https://www.ginniemae.gov/api/v1/node/impact_area_items",
+  "status": 200,
+  "data": 1
+ },
+ "node--memorandum": {
+  "href": "https://www.ginniemae.gov/api/v1/node/memorandum",
+  "status": 200,
+  "data": null
+ },
+ "node--mission_area_sub_item": {
+  "href": "https://www.ginniemae.gov/api/v1/node/mission_area_sub_item",
+  "status": 200,
+  "data": 1
+ },
+ "node--participants": {
+  "href": "https://www.ginniemae.gov/api/v1/node/participants",
+  "status": 200,
+  "data": 1
+ },
+ "node--person": {
+  "href": "https://www.ginniemae.gov/api/v1/node/person",
+  "status": 200,
+  "data": null
+ },
+ "node--press_releases": {
+  "href": "https://www.ginniemae.gov/api/v1/node/press_releases",
+  "status": 200,
+  "data": null
+ },
+ "node--remote_video": {
+  "href": "https://www.ginniemae.gov/api/v1/node/remote_video",
+  "status": 200,
+  "data": 1
+ },
+ "node--speeches": {
+  "href": "https://www.ginniemae.gov/api/v1/node/speeches",
+  "status": 200,
+  "data": 0
+ },
+ "node--training_announcement": {
+  "href": "https://www.ginniemae.gov/api/v1/node/training_announcement",
+  "status": 200,
+  "data": 1
+ },
+ "node--web_page": {
+  "href": "https://www.ginniemae.gov/api/v1/node/web_page",
+  "status": 200,
+  "data": null
+ },
+ "node_type--node_type": {
+  "href": "https://www.ginniemae.gov/api/v1/node_type/node_type",
+  "status": 200,
+  "data": 1
+ },
+ "oauth2_scope--oauth2_scope": {
+  "href": "https://www.ginniemae.gov/api/v1/oauth2_scope/oauth2_scope",
+  "status": 200,
+  "data": 0
+ },
+ "oauth2_token--access_token": {
+  "href": "https://www.ginniemae.gov/api/v1/oauth2_token/access_token",
+  "status": 200,
+  "data": 0
+ },
+ "oauth2_token--auth_code": {
+  "href": "https://www.ginniemae.gov/api/v1/oauth2_token/auth_code",
+  "status": 200,
+  "data": 0
+ },
+ "oauth2_token--refresh_token": {
+  "href": "https://www.ginniemae.gov/api/v1/oauth2_token/refresh_token",
+  "status": 200,
+  "data": 0
+ },
+ "oauth2_token_type--oauth2_token_type": {
+  "href": "https://www.ginniemae.gov/api/v1/oauth2_token_type/oauth2_token_type",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--accordion": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/accordion",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--accordion_end": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/accordion_end",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--accordion_start": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/accordion_start",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--accordion_toggle": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/accordion_toggle",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--body_field": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/body_field",
+  "status": 200,
+  "data": null
+ },
+ "paragraph--cta_block": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/cta_block",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--event": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/event",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--form": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/form",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--form_action": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/form_action",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--form_field": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/form_field",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--java_api": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/java_api",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--json_api": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/json_api",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--link": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/link",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--section": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/section",
+  "status": 200,
+  "data": 0
+ },
+ "paragraph--section_header": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/section_header",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--table_cell": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/table_cell",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--table_cell_header": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/table_cell_header",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--table_header": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/table_header",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--table_row": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/table_row",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--three_column_list": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/three_column_list",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--three_column_pdf_list": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/three_column_pdf_list",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--three_column_pdf_list_header": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/three_column_pdf_list_header",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--two_column_pdf_list": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/two_column_pdf_list",
+  "status": 200,
+  "data": 1
+ },
+ "paragraph--two_column_pdf_list_header": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraph/two_column_pdf_list_header",
+  "status": 200,
+  "data": 0
+ },
+ "paragraphs_type--paragraphs_type": {
+  "href": "https://www.ginniemae.gov/api/v1/paragraphs_type/paragraphs_type",
+  "status": 200,
+  "data": 1
+ },
+ "path_alias--path_alias": {
+  "href": "https://www.ginniemae.gov/api/v1/path_alias/path_alias",
+  "status": 200,
+  "data": 0
+ },
+ "pathauto_pattern--pathauto_pattern": {
+  "href": "https://www.ginniemae.gov/api/v1/pathauto_pattern/pathauto_pattern",
+  "status": 200,
+  "data": 0
+ },
+ "redirect--redirect": {
+  "href": "https://www.ginniemae.gov/api/v1/redirect/redirect",
+  "status": 200,
+  "data": 0
+ },
+ "rest_resource_config--rest_resource_config": {
+  "href": "https://www.ginniemae.gov/api/v1/rest_resource_config/rest_resource_config",
+  "status": 200,
+  "data": 0
+ },
+ "search_api_index--search_api_index": {
+  "href": "https://www.ginniemae.gov/api/v1/search_api_index/search_api_index",
+  "status": 200,
+  "data": 0
+ },
+ "search_api_server--search_api_server": {
+  "href": "https://www.ginniemae.gov/api/v1/search_api_server/search_api_server",
+  "status": 200,
+  "data": 0
+ },
+ "search_api_task--search_api_task": {
+  "href": "https://www.ginniemae.gov/api/v1/search_api_task/search_api_task",
+  "status": 200,
+  "data": 0
+ },
+ "shortcut--default": {
+  "href": "https://www.ginniemae.gov/api/v1/shortcut/default",
+  "status": 200,
+  "data": 0
+ },
+ "shortcut_set--shortcut_set": {
+  "href": "https://www.ginniemae.gov/api/v1/shortcut_set/shortcut_set",
+  "status": 200,
+  "data": 0
+ },
+ "simple_sitemap--simple_sitemap": {
+  "href": "https://www.ginniemae.gov/api/v1/simple_sitemap/simple_sitemap",
+  "status": 200,
+  "data": 0
+ },
+ "simple_sitemap_type--simple_sitemap_type": {
+  "href": "https://www.ginniemae.gov/api/v1/simple_sitemap_type/simple_sitemap_type",
+  "status": 200,
+  "data": 0
+ },
+ "smart_date_format--smart_date_format": {
+  "href": "https://www.ginniemae.gov/api/v1/smart_date_format/smart_date_format",
+  "status": 200,
+  "data": 1
+ },
+ "smart_date_override--smart_date_override": {
+  "href": "https://www.ginniemae.gov/api/v1/smart_date_override/smart_date_override",
+  "status": 200,
+  "data": 0
+ },
+ "smart_date_rule--smart_date_rule": {
+  "href": "https://www.ginniemae.gov/api/v1/smart_date_rule/smart_date_rule",
+  "status": 200,
+  "data": 0
+ },
+ "taxonomy_term--audience": {
+  "href": "https://www.ginniemae.gov/api/v1/taxonomy_term/audience",
+  "status": 200,
+  "data": 1
+ },
+ "taxonomy_term--category": {
+  "href": "https://www.ginniemae.gov/api/v1/taxonomy_term/category",
+  "status": 200,
+  "data": 1
+ },
+ "taxonomy_term--faq_category": {
+  "href": "https://www.ginniemae.gov/api/v1/taxonomy_term/faq_category",
+  "status": 200,
+  "data": 1
+ },
+ "taxonomy_term--podcast_categories": {
+  "href": "https://www.ginniemae.gov/api/v1/taxonomy_term/podcast_categories",
+  "status": 200,
+  "data": 1
+ },
+ "taxonomy_term--publication_type": {
+  "href": "https://www.ginniemae.gov/api/v1/taxonomy_term/publication_type",
+  "status": 200,
+  "data": 1
+ },
+ "taxonomy_term--qrc_type": {
+  "href": "https://www.ginniemae.gov/api/v1/taxonomy_term/qrc_type",
+  "status": 200,
+  "data": 1
+ },
+ "taxonomy_vocabulary--taxonomy_vocabulary": {
+  "href": "https://www.ginniemae.gov/api/v1/taxonomy_vocabulary/taxonomy_vocabulary",
+  "status": 200,
+  "data": 0
+ },
+ "theme_switcher_rule--theme_switcher_rule": {
+  "href": "https://www.ginniemae.gov/api/v1/theme_switcher_rule/theme_switcher_rule",
+  "status": 200,
+  "data": 0
+ },
+ "toolbar_menu_element--toolbar_menu_element": {
+  "href": "https://www.ginniemae.gov/api/v1/toolbar_menu_element/toolbar_menu_element",
+  "status": 200,
+  "data": 0
+ },
+ "ultimate_cron_job--ultimate_cron_job": {
+  "href": "https://www.ginniemae.gov/api/v1/ultimate_cron_job/ultimate_cron_job",
+  "status": 200,
+  "data": 0
+ },
+ "user--user": {
+  "href": "https://www.ginniemae.gov/api/v1/user/user",
+  "status": 200,
+  "data": 1
+ },
+ "user_role--user_role": {
+  "href": "https://www.ginniemae.gov/api/v1/user_role/user_role",
+  "status": 200,
+  "data": 0
+ },
+ "view--view": {
+  "href": "https://www.ginniemae.gov/api/v1/view/view",
+  "status": 200,
+  "data": 0
+ },
+ "workflow--workflow": {
+  "href": "https://www.ginniemae.gov/api/v1/workflow/workflow",
+  "status": 200,
+  "data": 0
+ }
+}

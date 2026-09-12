@@ -1,0 +1,73 @@
+# Ginnie Mae
+
+> The Government National Mortgage Association (Ginnie Mae) is a wholly-owned U.S. government
+> corporation within the Department of Housing and Urban Development. It guarantees the timely
+> payment of principal and interest on mortgage-backed securities backed by federally insured or
+> guaranteed loans. Ginnie Mae runs no developer program and publishes no API documentation, but
+> its website is a decoupled Drupal 10 application and its public JSON:API 1.0 content surface is
+> open to anyone, with no key and no account.
+
+<!--
+generated: 2026-09-12
+method: generated
+source: API Evangelist enrichment pipeline, from apis.yml and this repository's artifacts.
+NOTE: This file is NOT published by Ginnie Mae. https://www.ginniemae.gov/llms.txt returns HTTP 200
+with the Angular application shell, not a document. This is API Evangelist's description of a
+surface Ginnie Mae operates but does not document.
+-->
+
+## What is actually callable
+
+- [Ginnie Mae Content API](https://www.ginniemae.gov/api/v1/): JSON:API 1.0. 120 resource types,
+  every one anonymously readable (verified 2026-09-12). No authentication, no key, no account.
+- [JSON:API entrypoint](https://www.ginniemae.gov/api/v1/): lists every resource type, keyed
+  `<entity_type>--<bundle>`. Start here — it is the only machine-readable index that exists.
+- [Site search](https://www.ginniemae.gov/api/v1/search/results?keywords=): full-text across the
+  whole estate, 10,798 indexed results. Declares its own accepted filters in every response.
+- [FAQ](https://www.ginniemae.gov/api/v1/faq): 433 official question-and-answer pairs, filterable
+  by keyword, category and subcategory.
+- [Glossary](https://www.ginniemae.gov/api/v1/glossary): 174 mortgage-securities terms with
+  official Ginnie Mae definitions.
+- [Press releases](https://www.ginniemae.gov/api/v1/press_releases): 365 releases, filterable by
+  keyword, month and year.
+- [All Participant Memoranda and bulletins](https://www.ginniemae.gov/api/v1/node/memorandum):
+  the program change-notice corpus, each with its attached PDF.
+- [Disclosure file types](https://www.ginniemae.gov/api/v1/node/data_file_types): each disclosure
+  data file type resolved to its published record-layout document.
+- [Research blog](https://www.ginniemae.gov/api/v1/node/haps): the Ginnie Mae research and
+  insights articles, with contributors and related-article links.
+- [Site menus as RFC 9264 linksets](https://www.ginniemae.gov/system/menu/main/linkset):
+  `main`, `footer`, `disclosure-plus-download-data`, `disclosure-plus-resources`.
+
+## How to call it
+
+- Pagination: `page[limit]` and `page[offset]` on JSON:API collections; `page` and
+  `items_per_page` on the Views exports, whose responses report `pager.total_results`.
+- Filtering: `filter[<field>]=<value>` or the expanded `filter[<n>][value]`/`[operator]`/`[path]`
+  form. An unknown field returns HTTP 400 naming the offending field.
+- Sorting: `sort=-created`. Sparse fields: `fields[node--press_releases]=title`. Expansion: `include=`.
+- IMPORTANT: this site runs JSON:API Extras with field enhancement, so attributes are FLATTENED
+  onto the resource object. There is no `data.attributes` member. Read field names from a real
+  record first.
+- Errors are the JSON:API `errors[]` envelope, NOT RFC 9457 problem+json. An unknown resource TYPE
+  is answered with an HTML 404 page rather than JSON — handle that case.
+- No rate limit is published and no RateLimit-*/Retry-After header is returned. Be conservative.
+- robots.txt carries `Disallow: /api/`. The surface is open, but it is not an advertised product.
+
+## What is NOT here
+
+- No OpenAPI, no developer portal, no API documentation, no SDKs, no CLI, no changelog, no status
+  page, no GitHub organisation, no MCP server, no agent card, no security.txt, no OAuth metadata.
+- MBS disclosure data — pool and loan-level files, HMBS, Multifamily, REMIC, Platinum — is NOT in
+  this API. It is distributed as bulk files through https://bulk.ginniemae.gov/, behind a free
+  account. See https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
+- Issuer systems are behind MyGinnieMae single sign-on at https://my.ginniemae.gov/.
+- Do not read `user--user` from the entrypoint. It is CMS account data, not published content.
+
+## Optional
+
+- [Vulnerability Disclosure Policy](https://www.ginniemae.gov/site-policies/ginnie-mae-vulnerability-disclosure-policy): CISA BOD 20-01 shaped; scope `*.ginniemae.gov`; reports to ginniemaevdp@hud.gov; acknowledged within 3 business days; no bounty.
+- [Privacy Policy](https://www.ginniemae.gov/site-policies/site-policies/privacy-policy)
+- [Disclaimer and site policies](https://www.ginniemae.gov/site-policies/site-policies/disclaimer)
+- [Contact](https://www.ginniemae.gov/contact-us)
+- [API Evangelist profile of Ginnie Mae](https://apis.io/provider/ginnie-mae)

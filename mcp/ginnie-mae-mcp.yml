@@ -1,0 +1,98 @@
+generated: '2026-09-12'
+method: derived
+source: >-
+  Derived from openapi/ginnie-mae-content-api-openapi.yml. No MCP server exists —
+  searched for one first (see evidence).
+provider: Ginnie Mae
+providerId: ginnie-mae
+status: candidate
+description: >-
+  A CANDIDATE tool list, derived by API Evangelist from the operations Ginnie Mae's
+  public JSON:API surface actually exposes. Ginnie Mae ships no MCP server. Nothing
+  in this file is callable today and no MCPServer pointer is wired into apis.yml,
+  because doing so would credit the agency with an agent surface it does not operate.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: none
+  verified: derived
+  note: >-
+    mode "none" means exactly what it says: nobody ships a server, remote or local.
+    The auth value reflects the underlying API, which needs no credential — if a
+    server were built, its tools would need no authentication either.
+search_evidence:
+  - probe: 'npm registry search "ginniemae" / "ginnie mae"'
+    result: no MCP package
+  - probe: 'github.com/ginniemae and api.github.com/search/users?q=ginniemae'
+    result: 'HTTP 404 / total_count 0 — no organisation, no repository'
+  - probe: 'https://www.ginniemae.gov/.well-known/agent-card.json and /.well-known/agent.json'
+    result: 'HTTP 200 but the Angular application shell, not a card. See well-known/ginnie-mae-well-known.yml'
+  - probe: 'https://www.ginniemae.gov/mcp, /sse, /api/v1/mcp'
+    result: 'not advertised anywhere in the site, its runtime configuration or its JSON:API entrypoint'
+candidate_tools:
+  - name: search_ginniemae
+    description: >-
+      Full-text search across the Ginnie Mae website estate — pages, memoranda, media
+      and documents — returning title, URL, file extension and a highlighted excerpt.
+    rest: [searchSite]
+    inputs: [keywords, result_type, search_text_operator, sort_by, sort_order, page, items_per_page]
+    note: '10,798 indexed results observed 2026-09-12; the single highest-value entry point.'
+  - name: list_all_participant_memoranda
+    description: >-
+      List Ginnie Mae All Participant Memoranda, MBS Program Memoranda and bulletins,
+      each with its attached PDF, filterable and sortable by date.
+    rest: [listNodeMemorandum, getNodeMemorandum]
+    inputs: ['filter', 'sort', 'page[limit]', 'page[offset]', include]
+  - name: get_memorandum_document
+    description: Resolve a memorandum to the file entity carrying its downloadable document URI.
+    rest: [listMediaDocumentFile, getMediaDocumentFile, getFileFile]
+    inputs: [uuid, include]
+  - name: list_press_releases
+    description: List Ginnie Mae press releases, filterable by keyword, month and year.
+    rest: [listPressReleases]
+    inputs: [keywords, month, year, sort_by, sort_order, page]
+  - name: lookup_glossary_term
+    description: >-
+      Look up a Ginnie Mae mortgage-securities term and its official definition
+      (174 terms observed 2026-09-12).
+    rest: [listGlossaryTerms, listNodeGlossary]
+    inputs: ['filter', 'page[limit]']
+  - name: answer_from_faq
+    description: >-
+      Retrieve official Ginnie Mae FAQ answers, filterable by keyword, category and
+      subcategory (433 entries across 27 categories observed 2026-09-12).
+    rest: [listFaqs, listFaqCategories, listFaqSubcategories]
+    inputs: [keywords, category, subcategory, page]
+  - name: list_disclosure_file_types
+    description: >-
+      List Ginnie Mae disclosure data file types and resolve each to its published
+      record-layout document — the bridge from the website into the bulk MBS
+      disclosure product.
+    rest: [listNodeDataFileTypes, getNodeDataFileTypes, listMediaDisclosureDataFile]
+    inputs: ['filter', include]
+  - name: list_research_articles
+    description: >-
+      List the Ginnie Mae research and insights blog, with contributors and related
+      articles.
+    rest: [listNodeHaps, getNodeHaps, listNodeHapsContributor]
+    inputs: ['filter', 'sort', include]
+  - name: list_training_and_events
+    description: List Ginnie Mae training announcements and events with their materials.
+    rest: [listNodeTrainingAnnouncement, listNodeEvent]
+    inputs: ['filter', 'sort', include]
+  - name: get_site_navigation
+    description: >-
+      Retrieve a ginniemae.gov navigation menu as an RFC 9264 linkset — the cheapest
+      way for an agent to learn the shape of the site before crawling it.
+    rest: [getMenuLinkset]
+    inputs: [menu]
+coverage:
+  candidate_tools: 10
+  rest_operations_described: 147
+  note: >-
+    The ten tools above cover the operations with real public value. The remaining
+    operations are per-bundle JSON:API collections for page-building paragraphs, media
+    variants and taxonomies, which are better reached through include= expansion from
+    the tools above than as tools of their own.

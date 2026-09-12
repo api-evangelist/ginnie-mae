@@ -7,71 +7,213 @@ description: >-
   to expand mortgage funding insured or guaranteed by federal agencies. By
   providing a full-faith-and-credit guarantee on securities backed by these
   mortgages, Ginnie Mae reduces investor risk and broadens the market for
-  mortgage-backed securities.
+  mortgage-backed securities. Ginnie Mae runs no developer program and publishes
+  no API documentation, but ginniemae.gov is a decoupled Drupal 10 site whose
+  public, unauthenticated JSON:API 1.0 surface at
+  https://www.ginniemae.gov/api/v1/ is reachable by anyone — the FAQ, glossary,
+  press releases, All Participant Memoranda, bulletins and document library the
+  website is built from. MBS disclosure data is distributed separately as bulk
+  files behind a free account, and issuer systems sit behind MyGinnieMae SSO.
 type: Index
 deliveryModel:
   model: unknown
   open_source: false
   commercial: false
-  callable_host: false
-  label: Delivery model not determined — needs a product licence on record
-  confidence: low
-  source:
-  - none
-  generated: '2026-08-28'
-  method: derived
-accessModel:
-  pricing: freemium
-  onboarding: unknown
-  trial: false
-  try_now: false
-  public: false
-  label: Freemium
+  callable_host: true
+  label: Public, unauthenticated JSON:API content surface on the agency's own host
   confidence: medium
   source:
+  - probe
+  generated: '2026-09-12'
+  method: probed
+accessModel:
+  pricing: free
+  onboarding: none
+  trial: false
+  try_now: true
+  public: true
+  label: Free — U.S. government content API, no key, no account, no published plans
+  confidence: medium
+  source:
+  - probe
   - plans
-  generated: '2026-07-22'
-  method: derived
+  generated: '2026-09-12'
+  method: probed
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ginnie-mae.png
 access: 3rd-Party
 created: '2024-12-03'
-modified: '2026-04-28'
-position: Consuming
+modified: '2026-09-12'
+position: Producing
 tags:
   - Federal-Government
   - Housing
   - Mortgages
+  - Mortgage-Backed-Securities
+  - Open-Data
+  - Content
+  - JSON-API
 tags_raw:
   - Federal Government
   - Housing
   - Mortgages
+  - Mortgage-Backed Securities
+  - Open Data
+  - Content
+  - JSON API
 url: >-
   https://raw.githubusercontent.com/api-evangelist/ginnie-mae/refs/heads/main/apis.yml
 specificationVersion: '0.23'
 apis:
   - aid: ginnie-mae:ginnie-mae
-    name: Ginnie Mae
+    name: Ginnie Mae Disclosure Data
     tags:
       - Federal-Government
       - Housing
+      - Mortgage-Backed-Securities
     tags_raw:
       - Federal Government
       - Housing
-    humanURL: https://www.ginniemae.gov
+      - Mortgage-Backed Securities
+    humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ginnie-mae.png
+    baseURL: https://www.ginniemae.gov/disclosure-api/api
     properties:
-      - url: https://www.ginniemae.gov
+      - url: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
         type: Documentation
+      - url: https://bulk.ginniemae.gov/
+        type: Portal
     description: >-
-      Multifamily Database is a Ginnie Mae database that contains information
-      about Ginnie Maes multifamily mortgage-backed securities at the security
-      and loan level.
+      Ginnie Mae's security- and loan-level disclosure for its mortgage-backed
+      securities — daily, weekly, monthly and factor files covering single-family
+      MBS, HMBS, Multifamily, REMIC and Platinum, plus the published file layouts.
+      It is distributed as bulk downloadable files through the Disclosure Data
+      Download application at bulk.ginniemae.gov, not as a callable API: the
+      application is an Angular client over a file-download service, and file
+      retrieval requires a free registered account, so no anonymous base URL
+      exists. The baseURL recorded here is the download service the application's own
+      production configuration names — read verbatim from
+      https://bulk.ginniemae.gov/assets/config/config.prod.json (HTTP 200,
+      "disclosureWcfUrl": "https://www.ginniemae.gov/disclosure-api/api") — NOT
+      guessed from the domain. It is account-gated: probed 2026-09-12,
+      https://bulk.ginniemae.gov/ returns HTTP 200 and
+      https://www.ginniemae.gov/disclosure-api/api/download answers the single-page
+      application shell to an anonymous GET rather than data.
+  - aid: ginnie-mae:ginnie-mae-content-api
+    name: Ginnie Mae Content API
+    tags:
+      - Federal-Government
+      - Content
+      - JSON-API
+      - Open-Data
+    tags_raw:
+      - Federal Government
+      - Content
+      - JSON API
+      - Open Data
+    humanURL: https://www.ginniemae.gov/
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ginnie-mae.png
+    baseURL: https://www.ginniemae.gov/api/v1
+    description: >-
+      The public, unauthenticated JSON:API 1.0 surface that ginniemae.gov's
+      Angular single-page application is built on. A Drupal 10 back end exposes
+      120 resource types at https://www.ginniemae.gov/api/v1/ — every one of them
+      anonymously readable — alongside nine Views REST exports (site search, FAQ,
+      press releases, glossary, mission areas, video categories, disclosure
+      notifications) that declare their own exposed filters in each response, and
+      RFC 9264 linkset documents for the site menus. Ginnie Mae publishes no
+      OpenAPI, no developer portal and no documentation for it; the base URL was
+      read from the application's own runtime configuration at
+      /assets/config/config.prod.json and every described path was fetched
+      anonymously and returned HTTP 200 on 2026-09-12. Note that robots.txt
+      carries "Disallow: /api/" for crawlers.
+    properties:
+      - type: OpenAPI
+        url: openapi/ginnie-mae-content-api-openapi.yml
+      - type: Overlay
+        url: overlays/ginnie-mae-content-api-overlay.yaml
+      - type: Authentication
+        url: authentication/ginnie-mae-authentication.yml
+      - type: Conventions
+        url: conventions/ginnie-mae-conventions.yml
+      - type: ErrorCatalog
+        url: errors/ginnie-mae-problem-types.yml
+      - type: DataModel
+        url: data-model/ginnie-mae-data-model.yml
+      - type: Conformance
+        url: conformance/ginnie-mae-conformance.yml
+      - type: RateLimits
+        url: rate-limits/ginnie-mae-rate-limits.yml
+    x-evidence:
+      discovery_document: https://www.ginniemae.gov/api/v1/
+      http_status: 200
+      resource_types_declared: 120
+      resource_types_probed_200: 120
+      operations_described: 147
+      runtime_config: https://www.ginniemae.gov/assets/config/config.prod.json
+      fetched: '2026-09-12'
+      note: >-
+        Ownership check — the surface is served from www.ginniemae.gov, the
+        registrable domain the agency operates and the same host that serves the
+        public website. Every response carries x-generator "Drupal 10" and
+        x-consumer-id "default_consumer", the JSON:API entrypoint's own links[]
+        are absolute URLs back to www.ginniemae.gov/api/v1, and the content
+        returned is Ginnie Mae's own FAQ, glossary, memoranda and press releases.
+        There is no sibling brand or shared-codebase ambiguity here.
 common:
-  - type: DomainSecurity
-    url: security/ginnie-mae-domain-security.yml
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/ginnie-mae
   - type: Website
     url: https://www.ginniemae.gov/
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/ginnie-mae
+  - type: Blog
+    url: https://www.ginniemae.gov/newsroom/research-insights/haps-blog
+  - type: Support
+    url: https://www.ginniemae.gov/contact-us
+  - type: SignUp
+    url: https://www.ginniemae.gov/disclosure/create-account
+  - type: PrivacyPolicy
+    url: https://www.ginniemae.gov/site-policies/site-policies/privacy-policy
+  - type: TermsOfService
+    url: https://www.ginniemae.gov/site-policies/site-policies/disclaimer
+  - type: Security
+    url: https://www.ginniemae.gov/site-policies/ginnie-mae-vulnerability-disclosure-policy
+  - type: VulnerabilityDisclosure
+    url: security/ginnie-mae-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/ginnie-mae-domain-security.yml
+  - type: Lifecycle
+    url: lifecycle/ginnie-mae-lifecycle.yml
+  - type: Plans
+    url: plans/ginnie-mae-plans-pricing.yml
+  - type: LLMsTxt
+    url: llms/ginnie-mae-llms.txt
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: Packages
+    url: packages/ginnie-mae-packages.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-09-12'
+  status: enriched
+  artifacts_added: 18
+  pass: local-v3
+x-coverage:
+  state: covered
+  reason: contract-discovered
+  detail: >-
+    STEP 0b paid off. The docs host looked empty — every /.well-known path, /llms.txt and
+    /openapi.json on www.ginniemae.gov answers HTTP 200 with the Angular application shell —
+    but the site's own runtime configuration at /assets/config/config.prod.json names a
+    public API base, and https://www.ginniemae.gov/api/v1/ serves a JSON:API 1.0 entrypoint
+    declaring 120 resource types, all 120 of which returned HTTP 200 to an anonymous GET.
+  evidence:
+    - url: https://www.ginniemae.gov/api/v1/
+      status: 200
+    - url: https://www.ginniemae.gov/assets/config/config.prod.json
+      status: 200
+    - url: https://www.ginniemae.gov/.well-known/security.txt
+      status: 200
+    - url: https://www.ginniemae.gov/site-policies/ginnie-mae-vulnerability-disclosure-policy
+      status: 200
+  checked: '2026-09-12'

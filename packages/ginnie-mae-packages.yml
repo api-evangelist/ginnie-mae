@@ -1,0 +1,45 @@
+generated: '2026-09-12'
+method: searched
+source: >-
+  Registry searches of npm (registry.npmjs.org), PyPI, RubyGems and crates.io for
+  "ginniemae" and "ginnie mae"; GitHub user/org search for "ginniemae"; and a read
+  of ginniemae.gov's own site for SDK, client-library or code links. All 2026-09-12.
+provider: Ginnie Mae
+providerId: ginnie-mae
+package_count: 0
+official_package_count: 0
+packages: []
+description: >-
+  Ginnie Mae publishes no client libraries. This is a measured zero, not an
+  unchecked field.
+evidence:
+  - registry: npm
+    query: 'registry.npmjs.org/-/v1/search?text=ginniemae'
+    result: 0 matches
+    version: null
+    published: null
+  - registry: pypi
+    query: 'pypi.org/pypi/ginniemae/json and pypi.org/pypi/ginnie-mae/json'
+    result: HTTP 404 for both
+    version: null
+    published: null
+  - registry: rubygems
+    query: 'rubygems.org/api/v1/search.json?query=ginniemae'
+    result: 0 matches
+    version: null
+    published: null
+  - registry: crates.io
+    query: 'crates.io/api/v1/crates?q=ginniemae'
+    result: 0 matches
+    version: null
+    published: null
+  - registry: github
+    query: 'api.github.com/search/users?q=ginniemae'
+    result: 'total_count 0 — no GitHub organisation or user; github.com/ginniemae returns HTTP 404'
+    version: null
+    published: null
+note: >-
+  No SDKs pointer is wired into apis.yml, because there is no SDK. Nothing on
+  ginniemae.gov links to a client library, a code sample repository or a package of
+  any kind; the API the agency does serve is undocumented, so no library could be
+  built against a published contract in the first place.

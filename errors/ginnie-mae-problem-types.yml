@@ -1,0 +1,112 @@
+generated: '2026-09-12'
+method: probed
+source: >-
+  Live anonymous error responses observed against https://www.ginniemae.gov/api/v1/,
+  2026-09-12, cross-checked against openapi/ginnie-mae-content-api-openapi.yml.
+provider: Ginnie Mae
+providerId: ginnie-mae
+format: jsonapi-errors
+format_note: >-
+  NOT RFC 9457. The surface returns the JSON:API 1.0 errors[] envelope with media
+  type application/vnd.api+json — there is no application/problem+json, no "type"
+  URI and no "instance". The JSON:API members map onto RFC 9457 as
+  title->title, status->status, detail->detail, links.via->instance.
+envelope:
+  media_type: application/vnd.api+json
+  shape: |
+    {
+      "jsonapi": {"version": "1.0", "meta": {...}},
+      "errors": [
+        {
+          "title":  "Bad Request",
+          "status": "400",
+          "detail": "Invalid nested filtering. The field `nope`, given in the path `nope`, does not exist.",
+          "links": {
+            "via":  {"href": "<the request URL>"},
+            "info": {"href": "<an RFC 2616 section URL for the status code>"}
+          }
+        }
+      ]
+    }
+  fields:
+    - name: title
+      description: Human-readable status phrase.
+    - name: status
+      description: HTTP status code, as a STRING (JSON:API requirement) — "400", not 400.
+    - name: detail
+      description: >-
+        A specific, actionable message naming the offending field or path. This is the
+        most useful member for an agent: it says which query member was rejected.
+    - name: links.via
+      description: The exact request URL that produced the error — an instance pointer.
+    - name: links.info
+      description: A URL describing the status code class, normally an RFC 2616 section anchor.
+problem_types:
+  - id: bad-request-invalid-filter
+    status: 400
+    title: Bad Request
+    observed: true
+    evidence: 'GET https://www.ginniemae.gov/api/v1/node/faq?filter[nope]=1 -> 400, 2026-09-12'
+    detail_example: >-
+      Invalid nested filtering. The field `nope`, given in the path `nope`, does not exist.
+    cause: >-
+      A filter, sort or fields member names a field that does not exist on the target
+      resource type.
+    remediation: >-
+      Read the field names from a real resource object first — fetch the collection
+      with page[limit]=1 and use the keys it returns. Because this site runs JSON:API
+      Extras with field enhancement, attributes are flattened onto the resource object
+      rather than nested under "attributes", so the filter path is the flat key.
+    retryable: false
+  - id: forbidden
+    status: 403
+    title: Forbidden
+    observed: true
+    evidence: >-
+      GET https://www.ginniemae.gov/subscriptions/api -> 403 and
+      GET https://www.ginniemae.gov/user-profiles/api -> 403, 2026-09-12. Not observed
+      on any /api/v1 JSON:API collection, all 120 of which answered 200 anonymously.
+    cause: The requested service requires an authenticated account session.
+    remediation: >-
+      There is no public credential to obtain. These are account-holder services, not
+      part of the public content API.
+    retryable: false
+  - id: not-found-resource
+    status: 404
+    title: Not Found
+    observed: true
+    evidence: 'GET https://www.ginniemae.gov/api/v1/node/does_not_exist -> 404, 2026-09-12'
+    cause: Unknown resource type, or an individual resource UUID that does not exist.
+    remediation: >-
+      Enumerate valid resource types from the entrypoint at
+      https://www.ginniemae.gov/api/v1/ rather than guessing a bundle name.
+    retryable: false
+    caveat: >-
+      IMPORTANT INCONSISTENCY — a 404 for an unknown RESOURCE TYPE is answered with
+      Drupal's HTML error page (text/html), not a JSON:API error document. A client
+      that assumes every /api/v1 error is JSON will throw a parse error here. A 404
+      for a valid type with an unknown UUID does return the JSON:API envelope.
+  - id: soft-200-spa-shell
+    status: 200
+    title: Angular application shell returned for an unrouted path
+    observed: true
+    evidence: >-
+      GET https://www.ginniemae.gov/.well-known/security.txt, /llms.txt, /openapi.json,
+      /.well-known/agent-card.json and /oauth/token each returned HTTP 200 with
+      content-type text/html and the identical Angular index document, 2026-09-12.
+    cause: >-
+      www.ginniemae.gov serves a single-page application with a catch-all route. Any
+      path the Drupal back end does not claim is answered 200 with the SPA shell.
+    remediation: >-
+      Never treat a 200 from this host as proof a document exists. Check the
+      content-type and the body. This is the dominant false positive when probing
+      ginniemae.gov for well-known documents, and it is why this repository records
+      no WellKnown, SecurityTxt or AgentCard pointer.
+    retryable: false
+not_observed:
+  - status: 429
+    note: >-
+      No throttled response was produced, and no rate limit is published. Absence of
+      evidence, not evidence of absence — see rate-limits/ginnie-mae-rate-limits.yml.
+  - status: 500
+    note: No server error was produced during probing.

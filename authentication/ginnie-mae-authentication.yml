@@ -1,0 +1,70 @@
+generated: '2026-09-12'
+method: probed
+source: >-
+  Live anonymous probes of https://www.ginniemae.gov/api/v1/ and the ginniemae.gov
+  authentication surfaces, 2026-09-12.
+provider: Ginnie Mae
+providerId: ginnie-mae
+description: >-
+  Authentication profile for Ginnie Mae's public API surface. There is no
+  credential to obtain and none is advertised: the JSON:API content surface answers
+  anonymous requests in full. Everything Ginnie Mae does gate sits on different
+  hosts and is not an API.
+schemes: []
+summary:
+  requires_authentication: false
+  scheme_count: 0
+  note: >-
+    Every one of the 120 JSON:API resource collections at
+    https://www.ginniemae.gov/api/v1/ returned HTTP 200 to an unauthenticated GET
+    on 2026-09-12, as did all nine Views REST exports and the RFC 9264 linksets.
+    No Authorization header, API key, cookie or referer was sent. The OpenAPI in
+    openapi/ therefore declares no securitySchemes — an accurate description of the
+    surface, not a gap in the description.
+apis:
+  - aid: ginnie-mae:ginnie-mae-content-api
+    baseURL: https://www.ginniemae.gov/api/v1
+    authentication: none
+    evidence: 'HTTP 200 anonymous on 120/120 collections, 2026-09-12'
+gated_surfaces:
+  - name: MyGinnieMae Enterprise Portal
+    host: my.ginniemae.gov
+    mechanism: SSO / partner login
+    evidence: >-
+      https://my.ginniemae.gov/webcenter/portal/public 302s to
+      https://access.ginniemae.gov/auth (Oracle Access Manager), HTTP 200 at the
+      login challenge. Issuer, document-custodian and pool-processing systems live
+      behind it. Probed 2026-09-12.
+  - name: Disclosure Data Download
+    host: bulk.ginniemae.gov
+    mechanism: free registered account (email + secret question + emailed key)
+    evidence: >-
+      https://bulk.ginniemae.gov/ HTTP 200 serves an Angular client whose runtime
+      configuration (https://bulk.ginniemae.gov/assets/config/config.prod.json,
+      HTTP 200) names a download service at
+      https://www.ginniemae.gov/disclosure-api/api and a login route at
+      https://www.ginniemae.gov/disclosure/download-login. Anonymous GET of the
+      download service returns the SPA shell, not data. Account creation is at
+      https://www.ginniemae.gov/disclosure/create-account. Probed 2026-09-12.
+  - name: Subscription / user-profile services
+    host: www.ginniemae.gov
+    mechanism: account session
+    evidence: >-
+      https://www.ginniemae.gov/subscriptions/api and
+      https://www.ginniemae.gov/user-profiles/api both return HTTP 403 to an
+      anonymous request. Probed 2026-09-12.
+oauth:
+  published: false
+  note: >-
+    Drupal's simple_oauth module is installed (consumer--consumer,
+    oauth2_scope--oauth2_scope and oauth2_token--access_token / auth_code /
+    refresh_token are all exposed as JSON:API resource types) but no authorization
+    server is published. /.well-known/oauth-authorization-server,
+    /.well-known/oauth-protected-resource, /.well-known/openid-configuration and
+    /oauth/token each return HTTP 200 with the Angular application shell rather
+    than metadata — an SPA catch-all, not a document. No scopes/ artifact is written
+    for this provider because there is no scope surface to describe.
+docs: null
+docs_note: >-
+  Ginnie Mae publishes no authentication documentation for this API because it
+  publishes no documentation for the API at all.

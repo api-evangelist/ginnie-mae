@@ -1,0 +1,76 @@
+generated: '2026-09-12'
+method: searched
+source: >-
+  ginniemae.gov site search, footer linkset, robots.txt, sitemap.xml and live
+  response headers, 2026-09-12.
+provider: Ginnie Mae
+providerId: ginnie-mae
+description: >-
+  Lifecycle posture of Ginnie Mae's public API surface. Almost every field here is
+  an honest negative: Ginnie Mae operates the API but does not run it as a product,
+  so none of the product-lifecycle apparatus exists.
+versioning:
+  scheme: path
+  current_version: v1
+  base: https://www.ginniemae.gov/api/v1
+  policy_published: false
+  policy_url: null
+  detail: >-
+    The version lives in the path only. No supported-version list, no sunset
+    schedule, no version negotiation header, and no statement of what a breaking
+    change would be.
+deprecation:
+  policy_published: false
+  policy_url: null
+  headers_observed: []
+  rfc8594_sunset: false
+  deprecated_operations: []
+  detail: >-
+    No Deprecation or Sunset response header was returned on any probed endpoint
+    (2026-09-12), and no deprecation policy page exists. No operation in
+    openapi/ginnie-mae-content-api-openapi.yml is marked deprecated, because nothing
+    in the surface declares itself so.
+status_page:
+  published: false
+  url: null
+  evidence: >-
+    status.ginniemae.gov does not resolve (DNS NXDOMAIN, 2026-09-12). No status,
+    uptime or incident page is linked from the site footer linkset
+    (https://www.ginniemae.gov/system/menu/footer/linkset, HTTP 200), which lists only
+    Contact Us, FAQ, Glossary, Site Policies, Disclaimer, Accessibility, Government
+    Acts & Directives, Privacy Policy and the Vulnerability Disclosure Policy.
+  operational_notices:
+    channel: disclosure-download notifications
+    endpoint: https://www.ginniemae.gov/api/v1/bulk-notifications
+    detail: >-
+      The nearest thing to an operational feed. It is the notice banner for the
+      Disclosure Data Download application and is machine-readable, but it covers the
+      bulk data product, not the API. Returned an empty array on 2026-09-12.
+sla:
+  published: false
+  url: null
+  detail: No service level agreement, target or commitment is published for any Ginnie Mae API surface.
+changelog:
+  api_changelog_published: false
+  url: null
+  detail: >-
+    No API changelog or release notes exist. Ginnie Mae does publish a dated,
+    machine-readable corpus of PROGRAM change notices — All Participant Memoranda,
+    MBS Program Memoranda and bulletins, at
+    https://www.ginniemae.gov/api/v1/node/memorandum — but those announce changes to
+    the securities program and its file layouts, not to this API, and it would be
+    wrong to register them as a ChangeLog pointer. No changelog/ artifact is written
+    for this provider for that reason.
+support:
+  channel: https://www.ginniemae.gov/contact-us
+  detail: >-
+    General agency contact only. There is no developer support channel, forum,
+    community or issue tracker, and no GitHub organisation (github.com/ginniemae
+    returns 404 and a GitHub user search for "ginniemae" returns zero accounts,
+    checked 2026-09-12).
+security_response:
+  vulnerability_disclosure_policy: https://www.ginniemae.gov/site-policies/ginnie-mae-vulnerability-disclosure-policy
+  acknowledgement_commitment: 3 business days
+  detail: >-
+    The one lifecycle commitment Ginnie Mae does publish. See
+    security/ginnie-mae-vulnerability-disclosure.yml.
