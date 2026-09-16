@@ -48,10 +48,10 @@ tags:
   - Federal-Government
   - Housing
   - Mortgages
-  - Mortgage-Backed-Securities
-  - Open-Data
+  - Mortgage-Backed Securities
+  - Open Data
   - Content
-  - JSON-API
+  - JSON:API
 tags_raw:
   - Federal Government
   - Housing
@@ -64,102 +64,368 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/ginnie-mae/refs/heads/main/apis.yml
 specificationVersion: '0.23'
 apis:
-  - aid: ginnie-mae:ginnie-mae
-    name: Ginnie Mae Disclosure Data
-    tags:
-      - Federal-Government
-      - Housing
-      - Mortgage-Backed-Securities
-    tags_raw:
-      - Federal Government
-      - Housing
-      - Mortgage-Backed Securities
-    humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ginnie-mae.png
-    baseURL: https://www.ginniemae.gov/disclosure-api/api
-    properties:
-      - url: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
-        type: Documentation
-      - url: https://bulk.ginniemae.gov/
-        type: Portal
-    description: >-
-      Ginnie Mae's security- and loan-level disclosure for its mortgage-backed
-      securities — daily, weekly, monthly and factor files covering single-family
-      MBS, HMBS, Multifamily, REMIC and Platinum, plus the published file layouts.
-      It is distributed as bulk downloadable files through the Disclosure Data
-      Download application at bulk.ginniemae.gov, not as a callable API: the
-      application is an Angular client over a file-download service, and file
-      retrieval requires a free registered account, so no anonymous base URL
-      exists. The baseURL recorded here is the download service the application's own
-      production configuration names — read verbatim from
-      https://bulk.ginniemae.gov/assets/config/config.prod.json (HTTP 200,
-      "disclosureWcfUrl": "https://www.ginniemae.gov/disclosure-api/api") — NOT
-      guessed from the domain. It is account-gated: probed 2026-09-12,
-      https://bulk.ginniemae.gov/ returns HTTP 200 and
-      https://www.ginniemae.gov/disclosure-api/api/download answers the single-page
-      application shell to an anonymous GET rather than data.
-  - aid: ginnie-mae:ginnie-mae-content-api
-    name: Ginnie Mae Content API
-    tags:
-      - Federal-Government
-      - Content
-      - JSON-API
-      - Open-Data
-    tags_raw:
-      - Federal Government
-      - Content
-      - JSON API
-      - Open Data
-    humanURL: https://www.ginniemae.gov/
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ginnie-mae.png
-    baseURL: https://www.ginniemae.gov/api/v1
-    description: >-
-      The public, unauthenticated JSON:API 1.0 surface that ginniemae.gov's
-      Angular single-page application is built on. A Drupal 10 back end exposes
-      120 resource types at https://www.ginniemae.gov/api/v1/ — every one of them
-      anonymously readable — alongside nine Views REST exports (site search, FAQ,
-      press releases, glossary, mission areas, video categories, disclosure
-      notifications) that declare their own exposed filters in each response, and
-      RFC 9264 linkset documents for the site menus. Ginnie Mae publishes no
-      OpenAPI, no developer portal and no documentation for it; the base URL was
-      read from the application's own runtime configuration at
-      /assets/config/config.prod.json and every described path was fetched
-      anonymously and returned HTTP 200 on 2026-09-12. Note that robots.txt
-      carries "Disallow: /api/" for crawlers.
-    properties:
-      - type: OpenAPI
-        url: openapi/ginnie-mae-content-api-openapi.yml
-      - type: Overlay
-        url: overlays/ginnie-mae-content-api-overlay.yaml
-      - type: Authentication
-        url: authentication/ginnie-mae-authentication.yml
-      - type: Conventions
-        url: conventions/ginnie-mae-conventions.yml
-      - type: ErrorCatalog
-        url: errors/ginnie-mae-problem-types.yml
-      - type: DataModel
-        url: data-model/ginnie-mae-data-model.yml
-      - type: Conformance
-        url: conformance/ginnie-mae-conformance.yml
-      - type: RateLimits
-        url: rate-limits/ginnie-mae-rate-limits.yml
-    x-evidence:
-      discovery_document: https://www.ginniemae.gov/api/v1/
-      http_status: 200
-      resource_types_declared: 120
-      resource_types_probed_200: 120
-      operations_described: 147
-      runtime_config: https://www.ginniemae.gov/assets/config/config.prod.json
-      fetched: '2026-09-12'
-      note: >-
-        Ownership check — the surface is served from www.ginniemae.gov, the
-        registrable domain the agency operates and the same host that serves the
-        public website. Every response carries x-generator "Drupal 10" and
-        x-consumer-id "default_consumer", the JSON:API entrypoint's own links[]
-        are absolute URLs back to www.ginniemae.gov/api/v1, and the content
-        returned is Ginnie Mae's own FAQ, glossary, memoranda and press releases.
-        There is no sibling brand or shared-codebase ambiguity here.
+- aid: ginnie-mae:ginnie-mae
+  name: Ginnie Mae Disclosure Data
+  tags:
+  - Federal-Government
+  - Housing
+  - Mortgage-Backed Securities
+  tags_raw:
+  - Federal Government
+  - Housing
+  - Mortgage-Backed Securities
+  humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ginnie-mae.png
+  baseURL: https://www.ginniemae.gov/disclosure-api/api
+  properties:
+  - url: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
+    type: Documentation
+  - url: https://bulk.ginniemae.gov/
+    type: Portal
+  description: >-
+    Ginnie Mae's security- and loan-level disclosure for its mortgage-backed securities — daily, weekly,
+    monthly and factor files covering single-family MBS, HMBS, Multifamily, REMIC and Platinum, plus the
+    published file layouts. It is distributed as bulk downloadable files through the Disclosure Data Download
+    application at bulk.ginniemae.gov, not as a callable API: the application is an Angular client over
+    a file-download service, and file retrieval requires a free registered account, so no anonymous base
+    URL exists. The baseURL recorded here is the download service the application's own production configuration
+    names — read verbatim from https://bulk.ginniemae.gov/assets/config/config.prod.json (HTTP 200, "disclosureWcfUrl":
+    "https://www.ginniemae.gov/disclosure-api/api") — NOT guessed from the domain. It is account-gated:
+    probed 2026-09-12, https://bulk.ginniemae.gov/ returns HTTP 200 and https://www.ginniemae.gov/disclosure-api/api/download
+    answers the single-page application shell to an anonymous GET rather than data.
+- aid: ginnie-mae:ginnie-mae-block-content-api
+  name: Ginnie Mae Block Content API
+  description: The Block Content API from Ginnie Mae — 4 operation(s) for block content.
+  humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
+  baseURL: https://www.ginniemae.gov/disclosure-api/api
+  tags:
+  - Block Content
+  properties:
+  - type: OpenAPI
+    url: openapi/ginnie-mae-block-content-api-openapi.yml
+  - type: Authentication
+    url: authentication/ginnie-mae-authentication.yml
+  - type: Conventions
+    url: conventions/ginnie-mae-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ginnie-mae-problem-types.yml
+  - type: DataModel
+    url: data-model/ginnie-mae-data-model.yml
+  - type: Conformance
+    url: conformance/ginnie-mae-conformance.yml
+  - type: RateLimits
+    url: rate-limits/ginnie-mae-rate-limits.yml
+- aid: ginnie-mae:ginnie-mae-disclosure-api
+  name: Ginnie Mae Disclosure API
+  description: The Disclosure API from Ginnie Mae — 1 operation(s) for disclosure.
+  humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
+  baseURL: https://www.ginniemae.gov/disclosure-api/api
+  tags:
+  - Disclosure
+  properties:
+  - type: OpenAPI
+    url: openapi/ginnie-mae-disclosure-api-openapi.yml
+  - type: Authentication
+    url: authentication/ginnie-mae-authentication.yml
+  - type: Conventions
+    url: conventions/ginnie-mae-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ginnie-mae-problem-types.yml
+  - type: DataModel
+    url: data-model/ginnie-mae-data-model.yml
+  - type: Conformance
+    url: conformance/ginnie-mae-conformance.yml
+  - type: RateLimits
+    url: rate-limits/ginnie-mae-rate-limits.yml
+- aid: ginnie-mae:ginnie-mae-discovery-api
+  name: Ginnie Mae Discovery API
+  description: The Discovery API from Ginnie Mae — 2 operation(s) for discovery.
+  humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
+  baseURL: https://www.ginniemae.gov/disclosure-api/api
+  tags:
+  - Discovery
+  properties:
+  - type: OpenAPI
+    url: openapi/ginnie-mae-discovery-api-openapi.yml
+  - type: Authentication
+    url: authentication/ginnie-mae-authentication.yml
+  - type: Conventions
+    url: conventions/ginnie-mae-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ginnie-mae-problem-types.yml
+  - type: DataModel
+    url: data-model/ginnie-mae-data-model.yml
+  - type: Conformance
+    url: conformance/ginnie-mae-conformance.yml
+  - type: RateLimits
+    url: rate-limits/ginnie-mae-rate-limits.yml
+- aid: ginnie-mae:ginnie-mae-entity-subqueue-api
+  name: Ginnie Mae Entity Subqueue API
+  description: The Entity Subqueue API from Ginnie Mae — 12 operation(s) for entity subqueue.
+  humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
+  baseURL: https://www.ginniemae.gov/disclosure-api/api
+  tags:
+  - Entity Subqueue
+  properties:
+  - type: OpenAPI
+    url: openapi/ginnie-mae-entity-subqueue-api-openapi.yml
+  - type: Authentication
+    url: authentication/ginnie-mae-authentication.yml
+  - type: Conventions
+    url: conventions/ginnie-mae-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ginnie-mae-problem-types.yml
+  - type: DataModel
+    url: data-model/ginnie-mae-data-model.yml
+  - type: Conformance
+    url: conformance/ginnie-mae-conformance.yml
+  - type: RateLimits
+    url: rate-limits/ginnie-mae-rate-limits.yml
+- aid: ginnie-mae:ginnie-mae-faq-api
+  name: Ginnie Mae FAQ API
+  description: The FAQ API from Ginnie Mae — 3 operation(s) for faq.
+  humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
+  baseURL: https://www.ginniemae.gov/disclosure-api/api
+  tags:
+  - FAQ
+  properties:
+  - type: OpenAPI
+    url: openapi/ginnie-mae-faq-api-openapi.yml
+  - type: Authentication
+    url: authentication/ginnie-mae-authentication.yml
+  - type: Conventions
+    url: conventions/ginnie-mae-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ginnie-mae-problem-types.yml
+  - type: DataModel
+    url: data-model/ginnie-mae-data-model.yml
+  - type: Conformance
+    url: conformance/ginnie-mae-conformance.yml
+  - type: RateLimits
+    url: rate-limits/ginnie-mae-rate-limits.yml
+- aid: ginnie-mae:ginnie-mae-file-api
+  name: Ginnie Mae File API
+  description: The File API from Ginnie Mae — 2 operation(s) for file.
+  humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
+  baseURL: https://www.ginniemae.gov/disclosure-api/api
+  tags:
+  - File
+  properties:
+  - type: OpenAPI
+    url: openapi/ginnie-mae-file-api-openapi.yml
+  - type: Authentication
+    url: authentication/ginnie-mae-authentication.yml
+  - type: Conventions
+    url: conventions/ginnie-mae-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ginnie-mae-problem-types.yml
+  - type: DataModel
+    url: data-model/ginnie-mae-data-model.yml
+  - type: Conformance
+    url: conformance/ginnie-mae-conformance.yml
+  - type: RateLimits
+    url: rate-limits/ginnie-mae-rate-limits.yml
+- aid: ginnie-mae:ginnie-mae-media-api
+  name: Ginnie Mae Media API
+  description: The Media API from Ginnie Mae — 18 operation(s) for media.
+  humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
+  baseURL: https://www.ginniemae.gov/disclosure-api/api
+  tags:
+  - Media
+  properties:
+  - type: OpenAPI
+    url: openapi/ginnie-mae-media-api-openapi.yml
+  - type: Authentication
+    url: authentication/ginnie-mae-authentication.yml
+  - type: Conventions
+    url: conventions/ginnie-mae-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ginnie-mae-problem-types.yml
+  - type: DataModel
+    url: data-model/ginnie-mae-data-model.yml
+  - type: Conformance
+    url: conformance/ginnie-mae-conformance.yml
+  - type: RateLimits
+    url: rate-limits/ginnie-mae-rate-limits.yml
+- aid: ginnie-mae:ginnie-mae-menu-api
+  name: Ginnie Mae Menu API
+  description: The Menu API from Ginnie Mae — 2 operation(s) for menu.
+  humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
+  baseURL: https://www.ginniemae.gov/disclosure-api/api
+  tags:
+  - Menu
+  properties:
+  - type: OpenAPI
+    url: openapi/ginnie-mae-menu-api-openapi.yml
+  - type: Authentication
+    url: authentication/ginnie-mae-authentication.yml
+  - type: Conventions
+    url: conventions/ginnie-mae-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ginnie-mae-problem-types.yml
+  - type: DataModel
+    url: data-model/ginnie-mae-data-model.yml
+  - type: Conformance
+    url: conformance/ginnie-mae-conformance.yml
+  - type: RateLimits
+    url: rate-limits/ginnie-mae-rate-limits.yml
+- aid: ginnie-mae:ginnie-mae-menu-link-content-api
+  name: Ginnie Mae Menu Link Content API
+  description: The Menu Link Content API from Ginnie Mae — 2 operation(s) for menu link content.
+  humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
+  baseURL: https://www.ginniemae.gov/disclosure-api/api
+  tags:
+  - Menu Link Content
+  properties:
+  - type: OpenAPI
+    url: openapi/ginnie-mae-menu-link-content-api-openapi.yml
+  - type: Authentication
+    url: authentication/ginnie-mae-authentication.yml
+  - type: Conventions
+    url: conventions/ginnie-mae-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ginnie-mae-problem-types.yml
+  - type: DataModel
+    url: data-model/ginnie-mae-data-model.yml
+  - type: Conformance
+    url: conformance/ginnie-mae-conformance.yml
+  - type: RateLimits
+    url: rate-limits/ginnie-mae-rate-limits.yml
+- aid: ginnie-mae:ginnie-mae-newsroom-api
+  name: Ginnie Mae Newsroom API
+  description: The Newsroom API from Ginnie Mae — 1 operation(s) for newsroom.
+  humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
+  baseURL: https://www.ginniemae.gov/disclosure-api/api
+  tags:
+  - Newsroom
+  properties:
+  - type: OpenAPI
+    url: openapi/ginnie-mae-newsroom-api-openapi.yml
+  - type: Authentication
+    url: authentication/ginnie-mae-authentication.yml
+  - type: Conventions
+    url: conventions/ginnie-mae-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ginnie-mae-problem-types.yml
+  - type: DataModel
+    url: data-model/ginnie-mae-data-model.yml
+  - type: Conformance
+    url: conformance/ginnie-mae-conformance.yml
+  - type: RateLimits
+    url: rate-limits/ginnie-mae-rate-limits.yml
+- aid: ginnie-mae:ginnie-mae-node-api
+  name: Ginnie Mae Node API
+  description: The Node API from Ginnie Mae — 36 operation(s) for node.
+  humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
+  baseURL: https://www.ginniemae.gov/disclosure-api/api
+  tags:
+  - Node
+  properties:
+  - type: OpenAPI
+    url: openapi/ginnie-mae-node-api-openapi.yml
+  - type: Authentication
+    url: authentication/ginnie-mae-authentication.yml
+  - type: Conventions
+    url: conventions/ginnie-mae-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ginnie-mae-problem-types.yml
+  - type: DataModel
+    url: data-model/ginnie-mae-data-model.yml
+  - type: Conformance
+    url: conformance/ginnie-mae-conformance.yml
+  - type: RateLimits
+    url: rate-limits/ginnie-mae-rate-limits.yml
+- aid: ginnie-mae:ginnie-mae-paragraph-api
+  name: Ginnie Mae Paragraph API
+  description: The Paragraph API from Ginnie Mae — 48 operation(s) for paragraph.
+  humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
+  baseURL: https://www.ginniemae.gov/disclosure-api/api
+  tags:
+  - Paragraph
+  properties:
+  - type: OpenAPI
+    url: openapi/ginnie-mae-paragraph-api-openapi.yml
+  - type: Authentication
+    url: authentication/ginnie-mae-authentication.yml
+  - type: Conventions
+    url: conventions/ginnie-mae-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ginnie-mae-problem-types.yml
+  - type: DataModel
+    url: data-model/ginnie-mae-data-model.yml
+  - type: Conformance
+    url: conformance/ginnie-mae-conformance.yml
+  - type: RateLimits
+    url: rate-limits/ginnie-mae-rate-limits.yml
+- aid: ginnie-mae:ginnie-mae-search-api
+  name: Ginnie Mae Search API
+  description: The Search API from Ginnie Mae — 1 operation(s) for search.
+  humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
+  baseURL: https://www.ginniemae.gov/disclosure-api/api
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/ginnie-mae-search-api-openapi.yml
+  - type: Authentication
+    url: authentication/ginnie-mae-authentication.yml
+  - type: Conventions
+    url: conventions/ginnie-mae-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ginnie-mae-problem-types.yml
+  - type: DataModel
+    url: data-model/ginnie-mae-data-model.yml
+  - type: Conformance
+    url: conformance/ginnie-mae-conformance.yml
+  - type: RateLimits
+    url: rate-limits/ginnie-mae-rate-limits.yml
+- aid: ginnie-mae:ginnie-mae-site-content-api
+  name: Ginnie Mae Site Content API
+  description: The Site Content API from Ginnie Mae — 3 operation(s) for site content.
+  humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
+  baseURL: https://www.ginniemae.gov/disclosure-api/api
+  tags:
+  - Site Content
+  properties:
+  - type: OpenAPI
+    url: openapi/ginnie-mae-site-content-api-openapi.yml
+  - type: Authentication
+    url: authentication/ginnie-mae-authentication.yml
+  - type: Conventions
+    url: conventions/ginnie-mae-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ginnie-mae-problem-types.yml
+  - type: DataModel
+    url: data-model/ginnie-mae-data-model.yml
+  - type: Conformance
+    url: conformance/ginnie-mae-conformance.yml
+  - type: RateLimits
+    url: rate-limits/ginnie-mae-rate-limits.yml
+- aid: ginnie-mae:ginnie-mae-taxonomy-term-api
+  name: Ginnie Mae Taxonomy Term API
+  description: The Taxonomy Term API from Ginnie Mae — 12 operation(s) for taxonomy term.
+  humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
+  baseURL: https://www.ginniemae.gov/disclosure-api/api
+  tags:
+  - Taxonomy Term
+  properties:
+  - type: OpenAPI
+    url: openapi/ginnie-mae-taxonomy-term-api-openapi.yml
+  - type: Authentication
+    url: authentication/ginnie-mae-authentication.yml
+  - type: Conventions
+    url: conventions/ginnie-mae-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ginnie-mae-problem-types.yml
+  - type: DataModel
+    url: data-model/ginnie-mae-data-model.yml
+  - type: Conformance
+    url: conformance/ginnie-mae-conformance.yml
+  - type: RateLimits
+    url: rate-limits/ginnie-mae-rate-limits.yml
 common:
+  - type: Overlay
+    url: overlays/ginnie-mae-content-api-overlay.yaml
   - type: Website
     url: https://www.ginniemae.gov/
   - type: LinkedIn

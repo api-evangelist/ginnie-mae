@@ -1,0 +1,11 @@
+{
+  "repo": "ginnie-mae",
+  "feeds": [
+    {
+      "source": "https://www.linkedin.com/company/ginnie-mae",
+      "error": "HTTPError"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-09-13T13:00:00Z"
+}
