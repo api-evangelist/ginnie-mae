@@ -47,7 +47,7 @@ position: Producing
 tags:
   - Federal-Government
   - Housing
-  - Mortgages
+  - Mortgage
   - Mortgage-Backed Securities
   - Open Data
   - Content
@@ -98,7 +98,8 @@ apis:
   description: The Block Content API from Ginnie Mae — 4 operation(s) for block content.
   humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
   baseURL: https://www.ginniemae.gov/disclosure-api/api
-  tags:
+  tags: []
+  tags_raw:
   - Block Content
   properties:
   - type: OpenAPI
@@ -253,6 +254,8 @@ apis:
   humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
   baseURL: https://www.ginniemae.gov/disclosure-api/api
   tags:
+  - Menus
+  tags_raw:
   - Menu
   properties:
   - type: OpenAPI
@@ -341,6 +344,8 @@ apis:
   humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
   baseURL: https://www.ginniemae.gov/disclosure-api/api
   tags:
+  - paragraph
+  tags_raw:
   - Paragraph
   properties:
   - type: OpenAPI
