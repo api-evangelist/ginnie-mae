@@ -1,0 +1,795 @@
+openapi: 3.2.0
+info:
+  title: Ginnie Mae Content Taxonomy Term API
+  version: 1.0.0
+  summary: The public, unauthenticated JSON:API 1.0 content surface behind ginniemae.gov.
+  description: Ginnie Mae serves its public website (www.ginniemae.gov) as an Angular single-page application against a Drupal 10 back end, and that back end exposes a **public, unauthenticated JSON:API 1.0 surface at `https://www.ginniemae.gov/api/v1/`** plus a set of Views REST exports and RFC 9264 linkset documents.
+  contact:
+    name: Ginnie Mae
+    url: https://www.ginniemae.gov/contact-us
+  license:
+    name: U.S. Government Work (17 U.S.C. § 105)
+    url: https://www.ginniemae.gov/site-policies/site-policies/disclaimer
+servers:
+- url: https://www.ginniemae.gov
+  description: Production
+tags:
+- name: Taxonomy Term
+paths:
+  /api/v1/taxonomy_term/audience:
+    get:
+      operationId: listTaxonomyTermAudience
+      summary: List taxonomy_term--audience resources
+      description: Collection endpoint for the JSON:API resource type `taxonomy_term--audience`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Taxonomy Term
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/taxonomy_term/audience/{uuid}:
+    get:
+      operationId: getTaxonomyTermAudience
+      summary: Get one taxonomy_term--audience resource
+      description: Individual-resource endpoint for the JSON:API resource type `taxonomy_term--audience`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Taxonomy Term
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/taxonomy_term/category:
+    get:
+      operationId: listTaxonomyTermCategory
+      summary: List taxonomy_term--category resources
+      description: Collection endpoint for the JSON:API resource type `taxonomy_term--category`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Taxonomy Term
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/taxonomy_term/category/{uuid}:
+    get:
+      operationId: getTaxonomyTermCategory
+      summary: Get one taxonomy_term--category resource
+      description: Individual-resource endpoint for the JSON:API resource type `taxonomy_term--category`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Taxonomy Term
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/taxonomy_term/faq_category:
+    get:
+      operationId: listTaxonomyTermFaqCategory
+      summary: List taxonomy_term--faq_category resources
+      description: Collection endpoint for the JSON:API resource type `taxonomy_term--faq_category`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Taxonomy Term
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/taxonomy_term/faq_category/{uuid}:
+    get:
+      operationId: getTaxonomyTermFaqCategory
+      summary: Get one taxonomy_term--faq_category resource
+      description: Individual-resource endpoint for the JSON:API resource type `taxonomy_term--faq_category`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Taxonomy Term
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/taxonomy_term/podcast_categories:
+    get:
+      operationId: listTaxonomyTermPodcastCategories
+      summary: List taxonomy_term--podcast_categories resources
+      description: Collection endpoint for the JSON:API resource type `taxonomy_term--podcast_categories`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Taxonomy Term
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/taxonomy_term/podcast_categories/{uuid}:
+    get:
+      operationId: getTaxonomyTermPodcastCategories
+      summary: Get one taxonomy_term--podcast_categories resource
+      description: Individual-resource endpoint for the JSON:API resource type `taxonomy_term--podcast_categories`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Taxonomy Term
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/taxonomy_term/publication_type:
+    get:
+      operationId: listTaxonomyTermPublicationType
+      summary: List taxonomy_term--publication_type resources
+      description: Collection endpoint for the JSON:API resource type `taxonomy_term--publication_type`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Taxonomy Term
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/taxonomy_term/publication_type/{uuid}:
+    get:
+      operationId: getTaxonomyTermPublicationType
+      summary: Get one taxonomy_term--publication_type resource
+      description: Individual-resource endpoint for the JSON:API resource type `taxonomy_term--publication_type`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Taxonomy Term
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/taxonomy_term/qrc_type:
+    get:
+      operationId: listTaxonomyTermQrcType
+      summary: List taxonomy_term--qrc_type resources
+      description: Collection endpoint for the JSON:API resource type `taxonomy_term--qrc_type`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Taxonomy Term
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/taxonomy_term/qrc_type/{uuid}:
+    get:
+      operationId: getTaxonomyTermQrcType
+      summary: Get one taxonomy_term--qrc_type resource
+      description: Individual-resource endpoint for the JSON:API resource type `taxonomy_term--qrc_type`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Taxonomy Term
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    JsonApiCollectionDocument:
+      type: object
+      properties:
+        jsonapi:
+          $ref: '#/components/schemas/JsonApiVersion'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceObject'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceObject'
+        links:
+          type: object
+          additionalProperties: true
+        meta:
+          type: object
+          additionalProperties: true
+    ResourceObject:
+      type: object
+      required:
+      - type
+      - id
+      properties:
+        type:
+          type: string
+          examples:
+          - node--press_releases
+        id:
+          type: string
+          format: uuid
+        links:
+          type: object
+          additionalProperties: true
+        relationships:
+          type: object
+          additionalProperties: true
+        attributes:
+          type: object
+          additionalProperties: true
+      additionalProperties: true
+      description: This site runs JSON:API Extras with field enhancement, so resource attributes are flattened onto the resource object rather than nested under an "attributes" member. Both shapes are permitted here because the flattened shape is what the live surface returns.
+    JsonApiError:
+      type: object
+      properties:
+        title:
+          type: string
+          examples:
+          - Bad Request
+        status:
+          type: string
+          examples:
+          - '400'
+        detail:
+          type: string
+          examples:
+          - Invalid nested filtering. The field `nope`, given in the path `nope`, does not exist.
+        links:
+          type: object
+          properties:
+            via:
+              type: object
+              properties:
+                href:
+                  type: string
+                  format: uri
+            info:
+              type: object
+              properties:
+                href:
+                  type: string
+                  format: uri
+    JsonApiVersion:
+      type: object
+      properties:
+        version:
+          type: string
+          examples:
+          - '1.0'
+        meta:
+          type: object
+          additionalProperties: true
+    JsonApiItemDocument:
+      type: object
+      properties:
+        jsonapi:
+          $ref: '#/components/schemas/JsonApiVersion'
+        data:
+          $ref: '#/components/schemas/ResourceObject'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceObject'
+        links:
+          type: object
+          additionalProperties: true
+    JsonApiErrorDocument:
+      type: object
+      required:
+      - errors
+      properties:
+        jsonapi:
+          $ref: '#/components/schemas/JsonApiVersion'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/JsonApiError'
+  responses:
+    Forbidden:
+      description: The requester may not read this resource. Returned as a JSON:API error document.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/JsonApiErrorDocument'
+    BadRequest:
+      description: Malformed query — for example an unknown filter field. Returned as a JSON:API error document.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/JsonApiErrorDocument'
+    NotFound:
+      description: 'No such resource. NOTE: an unknown resource TYPE under /api/v1 is answered by Drupal with an HTML 404 page rather than a JSON:API error document (observed 2026-09-12).'
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/JsonApiErrorDocument'
+        text/html:
+          schema:
+            type: string
+externalDocs:
+  description: JSON:API 1.0 specification (the contract this surface conforms to)
+  url: https://jsonapi.org/format/1.0/
+x-generated-from:
+  method: generated
+  by: API Evangelist enrichment pipeline (local-v3)
+  generated: '2026-09-12'
+  sources:
+  - https://www.ginniemae.gov/api/v1/ (JSON:API 1.0 entrypoint document, HTTP 200, 120 resource types)
+  - https://www.ginniemae.gov/assets/config/config.prod.json (the SPA runtime configuration that names the API base)
+  - https://bulk.ginniemae.gov/assets/config/config.prod.json
+  - live anonymous GET probes of every path described, 2026-09-12
+  not_published_by_provider: true
+  verification: Every path carries a 2026-09-12 anonymous HTTP 200. Query parameters are either JSON:API 1.0 members verified against the live surface (page[limit], page[offset], sort, filter, fields) or exposed-filter names the endpoint declares about itself in its own response `filters` member.
+  caveat: 'robots.txt on www.ginniemae.gov carries "Disallow: /api/" for crawlers. The surface is not authenticated and not rate-limited in any advertised way, but it is also not an advertised developer product.'

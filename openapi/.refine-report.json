@@ -1,0 +1,48 @@
+{
+  "provider": "ginnie-mae",
+  "sources": [
+    "_original/ginnie-mae-content-api-openapi.yml"
+  ],
+  "outputs": [
+    "ginnie-mae-block-content-api-openapi.yml",
+    "ginnie-mae-disclosure-api-openapi.yml",
+    "ginnie-mae-discovery-api-openapi.yml",
+    "ginnie-mae-entity-subqueue-api-openapi.yml",
+    "ginnie-mae-faq-api-openapi.yml",
+    "ginnie-mae-file-api-openapi.yml",
+    "ginnie-mae-media-api-openapi.yml",
+    "ginnie-mae-menu-api-openapi.yml",
+    "ginnie-mae-menu-link-content-api-openapi.yml",
+    "ginnie-mae-newsroom-api-openapi.yml",
+    "ginnie-mae-node-api-openapi.yml",
+    "ginnie-mae-paragraph-api-openapi.yml",
+    "ginnie-mae-search-api-openapi.yml",
+    "ginnie-mae-site-content-api-openapi.yml",
+    "ginnie-mae-taxonomy-term-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "ginnie-mae-content-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "ginnie-mae-block-content-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ginnie-mae-disclosure-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ginnie-mae-discovery-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ginnie-mae-entity-subqueue-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ginnie-mae-faq-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ginnie-mae-file-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ginnie-mae-media-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ginnie-mae-menu-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ginnie-mae-menu-link-content-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ginnie-mae-newsroom-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ginnie-mae-node-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ginnie-mae-paragraph-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ginnie-mae-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ginnie-mae-site-content-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ginnie-mae-taxonomy-term-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

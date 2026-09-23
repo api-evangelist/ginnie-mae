@@ -1,0 +1,2055 @@
+openapi: 3.2.0
+info:
+  title: Ginnie Mae Content Node API
+  version: 1.0.0
+  summary: The public, unauthenticated JSON:API 1.0 content surface behind ginniemae.gov.
+  description: Ginnie Mae serves its public website (www.ginniemae.gov) as an Angular single-page application against a Drupal 10 back end, and that back end exposes a **public, unauthenticated JSON:API 1.0 surface at `https://www.ginniemae.gov/api/v1/`** plus a set of Views REST exports and RFC 9264 linkset documents.
+  contact:
+    name: Ginnie Mae
+    url: https://www.ginniemae.gov/contact-us
+  license:
+    name: U.S. Government Work (17 U.S.C. § 105)
+    url: https://www.ginniemae.gov/site-policies/site-policies/disclaimer
+servers:
+- url: https://www.ginniemae.gov
+  description: Production
+tags:
+- name: Node
+paths:
+  /api/v1/node/data_file_types:
+    get:
+      operationId: listNodeDataFileTypes
+      summary: List node--data_file_types resources
+      description: Collection endpoint for the JSON:API resource type `node--data_file_types`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Node
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/data_file_types/{uuid}:
+    get:
+      operationId: getNodeDataFileTypes
+      summary: Get one node--data_file_types resource
+      description: Individual-resource endpoint for the JSON:API resource type `node--data_file_types`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Node
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/event:
+    get:
+      operationId: listNodeEvent
+      summary: List node--event resources
+      description: Collection endpoint for the JSON:API resource type `node--event`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Node
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/event/{uuid}:
+    get:
+      operationId: getNodeEvent
+      summary: Get one node--event resource
+      description: Individual-resource endpoint for the JSON:API resource type `node--event`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Node
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/executive_leadership:
+    get:
+      operationId: listNodeExecutiveLeadership
+      summary: List node--executive_leadership resources
+      description: Collection endpoint for the JSON:API resource type `node--executive_leadership`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Node
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/executive_leadership/{uuid}:
+    get:
+      operationId: getNodeExecutiveLeadership
+      summary: Get one node--executive_leadership resource
+      description: Individual-resource endpoint for the JSON:API resource type `node--executive_leadership`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Node
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/faq:
+    get:
+      operationId: listNodeFaq
+      summary: List node--faq resources
+      description: Collection endpoint for the JSON:API resource type `node--faq`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Node
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/faq/{uuid}:
+    get:
+      operationId: getNodeFaq
+      summary: Get one node--faq resource
+      description: Individual-resource endpoint for the JSON:API resource type `node--faq`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Node
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/glossary:
+    get:
+      operationId: listNodeGlossary
+      summary: List node--glossary resources
+      description: Collection endpoint for the JSON:API resource type `node--glossary`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Node
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/glossary/{uuid}:
+    get:
+      operationId: getNodeGlossary
+      summary: Get one node--glossary resource
+      description: Individual-resource endpoint for the JSON:API resource type `node--glossary`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Node
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/haps:
+    get:
+      operationId: listNodeHaps
+      summary: List node--haps resources
+      description: Collection endpoint for the JSON:API resource type `node--haps`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Node
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/haps/{uuid}:
+    get:
+      operationId: getNodeHaps
+      summary: Get one node--haps resource
+      description: Individual-resource endpoint for the JSON:API resource type `node--haps`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Node
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/haps_contributor:
+    get:
+      operationId: listNodeHapsContributor
+      summary: List node--haps_contributor resources
+      description: Collection endpoint for the JSON:API resource type `node--haps_contributor`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Node
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/haps_contributor/{uuid}:
+    get:
+      operationId: getNodeHapsContributor
+      summary: Get one node--haps_contributor resource
+      description: Individual-resource endpoint for the JSON:API resource type `node--haps_contributor`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Node
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/hello_bar_notification:
+    get:
+      operationId: listNodeHelloBarNotification
+      summary: List node--hello_bar_notification resources
+      description: Collection endpoint for the JSON:API resource type `node--hello_bar_notification`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Node
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/hello_bar_notification/{uuid}:
+    get:
+      operationId: getNodeHelloBarNotification
+      summary: Get one node--hello_bar_notification resource
+      description: Individual-resource endpoint for the JSON:API resource type `node--hello_bar_notification`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Node
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/impact_area_items:
+    get:
+      operationId: listNodeImpactAreaItems
+      summary: List node--impact_area_items resources
+      description: Collection endpoint for the JSON:API resource type `node--impact_area_items`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Node
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/impact_area_items/{uuid}:
+    get:
+      operationId: getNodeImpactAreaItems
+      summary: Get one node--impact_area_items resource
+      description: Individual-resource endpoint for the JSON:API resource type `node--impact_area_items`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Node
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/memorandum:
+    get:
+      operationId: listNodeMemorandum
+      summary: List node--memorandum resources
+      description: Collection endpoint for the JSON:API resource type `node--memorandum`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Node
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/memorandum/{uuid}:
+    get:
+      operationId: getNodeMemorandum
+      summary: Get one node--memorandum resource
+      description: Individual-resource endpoint for the JSON:API resource type `node--memorandum`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Node
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/mission_area_sub_item:
+    get:
+      operationId: listNodeMissionAreaSubItem
+      summary: List node--mission_area_sub_item resources
+      description: Collection endpoint for the JSON:API resource type `node--mission_area_sub_item`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Node
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/mission_area_sub_item/{uuid}:
+    get:
+      operationId: getNodeMissionAreaSubItem
+      summary: Get one node--mission_area_sub_item resource
+      description: Individual-resource endpoint for the JSON:API resource type `node--mission_area_sub_item`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Node
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/participants:
+    get:
+      operationId: listNodeParticipants
+      summary: List node--participants resources
+      description: Collection endpoint for the JSON:API resource type `node--participants`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Node
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/participants/{uuid}:
+    get:
+      operationId: getNodeParticipants
+      summary: Get one node--participants resource
+      description: Individual-resource endpoint for the JSON:API resource type `node--participants`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Node
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/person:
+    get:
+      operationId: listNodePerson
+      summary: List node--person resources
+      description: Collection endpoint for the JSON:API resource type `node--person`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Node
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/person/{uuid}:
+    get:
+      operationId: getNodePerson
+      summary: Get one node--person resource
+      description: Individual-resource endpoint for the JSON:API resource type `node--person`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Node
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/press_releases:
+    get:
+      operationId: listNodePressReleases
+      summary: List node--press_releases resources
+      description: Collection endpoint for the JSON:API resource type `node--press_releases`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Node
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/press_releases/{uuid}:
+    get:
+      operationId: getNodePressReleases
+      summary: Get one node--press_releases resource
+      description: Individual-resource endpoint for the JSON:API resource type `node--press_releases`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Node
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/remote_video:
+    get:
+      operationId: listNodeRemoteVideo
+      summary: List node--remote_video resources
+      description: Collection endpoint for the JSON:API resource type `node--remote_video`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Node
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/remote_video/{uuid}:
+    get:
+      operationId: getNodeRemoteVideo
+      summary: Get one node--remote_video resource
+      description: Individual-resource endpoint for the JSON:API resource type `node--remote_video`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Node
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/speeches:
+    get:
+      operationId: listNodeSpeeches
+      summary: List node--speeches resources
+      description: Collection endpoint for the JSON:API resource type `node--speeches`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Node
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/speeches/{uuid}:
+    get:
+      operationId: getNodeSpeeches
+      summary: Get one node--speeches resource
+      description: Individual-resource endpoint for the JSON:API resource type `node--speeches`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Node
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/training_announcement:
+    get:
+      operationId: listNodeTrainingAnnouncement
+      summary: List node--training_announcement resources
+      description: Collection endpoint for the JSON:API resource type `node--training_announcement`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Node
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/training_announcement/{uuid}:
+    get:
+      operationId: getNodeTrainingAnnouncement
+      summary: Get one node--training_announcement resource
+      description: Individual-resource endpoint for the JSON:API resource type `node--training_announcement`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Node
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/web_page:
+    get:
+      operationId: listNodeWebPage
+      summary: List node--web_page resources
+      description: Collection endpoint for the JSON:API resource type `node--web_page`. Verified anonymously reachable (HTTP 200) on 2026-09-12.
+      tags:
+      - Node
+      parameters:
+      - name: page[limit]
+        in: query
+        required: false
+        description: JSON:API page size. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: page[offset]
+        in: query
+        required: false
+        description: JSON:API offset-based pagination cursor. Verified live 2026-09-12.
+        schema:
+          type: integer
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        description: Comma-separated JSON:API sort fields; a leading "-" reverses order (e.g. "-created"). Verified live 2026-09-12.
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: JSON:API filter. Shorthand filter[<field>]=<value> and the expanded filter[<name>][value]/[operator]/[path] form are both accepted; an unknown field returns HTTP 400. Verified live 2026-09-12.
+        schema:
+          type: object
+          additionalProperties: true
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load into the "included" member.
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        style: deepObject
+        explode: true
+        description: 'Sparse fieldsets, keyed by resource type: fields[node--press_releases]=title. Verified live 2026-09-12.'
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is an array of resource objects.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiCollectionDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/node/web_page/{uuid}:
+    get:
+      operationId: getNodeWebPage
+      summary: Get one node--web_page resource
+      description: Individual-resource endpoint for the JSON:API resource type `node--web_page`. `uuid` is the `id` member returned by the collection endpoint. A `resourceVersion` query value of `id:` or `rel:working-copy` selects a revision, as advertised in each resource object's own `links` member.
+      tags:
+      - Node
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Resource UUID.
+        schema:
+          type: string
+          format: uuid
+      - name: resourceVersion
+        in: query
+        required: false
+        description: Revision selector, e.g. `id:23481` or `rel:working-copy`.
+        schema:
+          type: string
+      - name: include
+        in: query
+        required: false
+        description: Comma-separated relationship paths to side-load.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A JSON:API document whose primary data is a single resource object.
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JsonApiItemDocument'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    JsonApiCollectionDocument:
+      type: object
+      properties:
+        jsonapi:
+          $ref: '#/components/schemas/JsonApiVersion'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceObject'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceObject'
+        links:
+          type: object
+          additionalProperties: true
+        meta:
+          type: object
+          additionalProperties: true
+    ResourceObject:
+      type: object
+      required:
+      - type
+      - id
+      properties:
+        type:
+          type: string
+          examples:
+          - node--press_releases
+        id:
+          type: string
+          format: uuid
+        links:
+          type: object
+          additionalProperties: true
+        relationships:
+          type: object
+          additionalProperties: true
+        attributes:
+          type: object
+          additionalProperties: true
+      additionalProperties: true
+      description: This site runs JSON:API Extras with field enhancement, so resource attributes are flattened onto the resource object rather than nested under an "attributes" member. Both shapes are permitted here because the flattened shape is what the live surface returns.
+    JsonApiError:
+      type: object
+      properties:
+        title:
+          type: string
+          examples:
+          - Bad Request
+        status:
+          type: string
+          examples:
+          - '400'
+        detail:
+          type: string
+          examples:
+          - Invalid nested filtering. The field `nope`, given in the path `nope`, does not exist.
+        links:
+          type: object
+          properties:
+            via:
+              type: object
+              properties:
+                href:
+                  type: string
+                  format: uri
+            info:
+              type: object
+              properties:
+                href:
+                  type: string
+                  format: uri
+    JsonApiVersion:
+      type: object
+      properties:
+        version:
+          type: string
+          examples:
+          - '1.0'
+        meta:
+          type: object
+          additionalProperties: true
+    JsonApiItemDocument:
+      type: object
+      properties:
+        jsonapi:
+          $ref: '#/components/schemas/JsonApiVersion'
+        data:
+          $ref: '#/components/schemas/ResourceObject'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceObject'
+        links:
+          type: object
+          additionalProperties: true
+    JsonApiErrorDocument:
+      type: object
+      required:
+      - errors
+      properties:
+        jsonapi:
+          $ref: '#/components/schemas/JsonApiVersion'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/JsonApiError'
+  responses:
+    Forbidden:
+      description: The requester may not read this resource. Returned as a JSON:API error document.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/JsonApiErrorDocument'
+    BadRequest:
+      description: Malformed query — for example an unknown filter field. Returned as a JSON:API error document.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/JsonApiErrorDocument'
+    NotFound:
+      description: 'No such resource. NOTE: an unknown resource TYPE under /api/v1 is answered by Drupal with an HTML 404 page rather than a JSON:API error document (observed 2026-09-12).'
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/JsonApiErrorDocument'
+        text/html:
+          schema:
+            type: string
+externalDocs:
+  description: JSON:API 1.0 specification (the contract this surface conforms to)
+  url: https://jsonapi.org/format/1.0/
+x-generated-from:
+  method: generated
+  by: API Evangelist enrichment pipeline (local-v3)
+  generated: '2026-09-12'
+  sources:
+  - https://www.ginniemae.gov/api/v1/ (JSON:API 1.0 entrypoint document, HTTP 200, 120 resource types)
+  - https://www.ginniemae.gov/assets/config/config.prod.json (the SPA runtime configuration that names the API base)
+  - https://bulk.ginniemae.gov/assets/config/config.prod.json
+  - live anonymous GET probes of every path described, 2026-09-12
+  not_published_by_provider: true
+  verification: Every path carries a 2026-09-12 anonymous HTTP 200. Query parameters are either JSON:API 1.0 members verified against the live surface (page[limit], page[offset], sort, filter, fields) or exposed-filter names the endpoint declares about itself in its own response `filters` member.
+  caveat: 'robots.txt on www.ginniemae.gov carries "Disallow: /api/" for crawlers. The surface is not authenticated and not rate-limited in any advertised way, but it is also not an advertised developer product.'
