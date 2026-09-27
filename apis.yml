@@ -45,7 +45,7 @@ created: '2024-12-03'
 modified: '2026-09-12'
 position: Producing
 tags:
-  - Federal-Government
+  - Federal Government
   - Housing
   - Mortgage
   - Mortgage-Backed Securities
@@ -60,6 +60,7 @@ tags_raw:
   - Open Data
   - Content
   - JSON API
+  - Federal-Government
 url: >-
   https://raw.githubusercontent.com/api-evangelist/ginnie-mae/refs/heads/main/apis.yml
 specificationVersion: '0.23'
@@ -67,13 +68,14 @@ apis:
 - aid: ginnie-mae:ginnie-mae
   name: Ginnie Mae Disclosure Data
   tags:
-  - Federal-Government
+  - Federal Government
   - Housing
   - Mortgage-Backed Securities
   tags_raw:
   - Federal Government
   - Housing
   - Mortgage-Backed Securities
+  - Federal-Government
   humanURL: https://www.ginniemae.gov/disclosure/disclosure-data/disclosure-data-download-files
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ginnie-mae.png
   baseURL: https://www.ginniemae.gov/disclosure-api/api

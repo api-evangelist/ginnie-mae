@@ -227,7 +227,70 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    BadRequest:
+      description: Malformed query — for example an unknown filter field. Returned as a JSON:API error document.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/JsonApiErrorDocument'
+    Forbidden:
+      description: The requester may not read this resource. Returned as a JSON:API error document.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/JsonApiErrorDocument'
+    NotFound:
+      description: 'No such resource. NOTE: an unknown resource TYPE under /api/v1 is answered by Drupal with an HTML 404 page rather than a JSON:API error document (observed 2026-09-12).'
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/JsonApiErrorDocument'
+        text/html:
+          schema:
+            type: string
   schemas:
+    JsonApiError:
+      type: object
+      properties:
+        title:
+          type: string
+          examples:
+          - Bad Request
+        status:
+          type: string
+          examples:
+          - '400'
+        detail:
+          type: string
+          examples:
+          - Invalid nested filtering. The field `nope`, given in the path `nope`, does not exist.
+        links:
+          type: object
+          properties:
+            via:
+              type: object
+              properties:
+                href:
+                  type: string
+                  format: uri
+            info:
+              type: object
+              properties:
+                href:
+                  type: string
+                  format: uri
+    JsonApiErrorDocument:
+      type: object
+      required:
+      - errors
+      properties:
+        jsonapi:
+          $ref: '#/components/schemas/JsonApiVersion'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/JsonApiError'
     JsonApiCollectionDocument:
       type: object
       properties:
@@ -271,46 +334,6 @@ components:
           additionalProperties: true
       additionalProperties: true
       description: This site runs JSON:API Extras with field enhancement, so resource attributes are flattened onto the resource object rather than nested under an "attributes" member. Both shapes are permitted here because the flattened shape is what the live surface returns.
-    JsonApiError:
-      type: object
-      properties:
-        title:
-          type: string
-          examples:
-          - Bad Request
-        status:
-          type: string
-          examples:
-          - '400'
-        detail:
-          type: string
-          examples:
-          - Invalid nested filtering. The field `nope`, given in the path `nope`, does not exist.
-        links:
-          type: object
-          properties:
-            via:
-              type: object
-              properties:
-                href:
-                  type: string
-                  format: uri
-            info:
-              type: object
-              properties:
-                href:
-                  type: string
-                  format: uri
-    JsonApiVersion:
-      type: object
-      properties:
-        version:
-          type: string
-          examples:
-          - '1.0'
-        meta:
-          type: object
-          additionalProperties: true
     JsonApiItemDocument:
       type: object
       properties:
@@ -325,39 +348,16 @@ components:
         links:
           type: object
           additionalProperties: true
-    JsonApiErrorDocument:
+    JsonApiVersion:
       type: object
-      required:
-      - errors
       properties:
-        jsonapi:
-          $ref: '#/components/schemas/JsonApiVersion'
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/JsonApiError'
-  responses:
-    Forbidden:
-      description: The requester may not read this resource. Returned as a JSON:API error document.
-      content:
-        application/vnd.api+json:
-          schema:
-            $ref: '#/components/schemas/JsonApiErrorDocument'
-    BadRequest:
-      description: Malformed query — for example an unknown filter field. Returned as a JSON:API error document.
-      content:
-        application/vnd.api+json:
-          schema:
-            $ref: '#/components/schemas/JsonApiErrorDocument'
-    NotFound:
-      description: 'No such resource. NOTE: an unknown resource TYPE under /api/v1 is answered by Drupal with an HTML 404 page rather than a JSON:API error document (observed 2026-09-12).'
-      content:
-        application/vnd.api+json:
-          schema:
-            $ref: '#/components/schemas/JsonApiErrorDocument'
-        text/html:
-          schema:
-            type: string
+        version:
+          type: string
+          examples:
+          - '1.0'
+        meta:
+          type: object
+          additionalProperties: true
 externalDocs:
   description: JSON:API 1.0 specification (the contract this surface conforms to)
   url: https://jsonapi.org/format/1.0/

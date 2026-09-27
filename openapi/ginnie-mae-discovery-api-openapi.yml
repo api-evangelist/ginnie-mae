@@ -60,6 +60,66 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    JsonApiError:
+      type: object
+      properties:
+        title:
+          type: string
+          examples:
+          - Bad Request
+        status:
+          type: string
+          examples:
+          - '400'
+        detail:
+          type: string
+          examples:
+          - Invalid nested filtering. The field `nope`, given in the path `nope`, does not exist.
+        links:
+          type: object
+          properties:
+            via:
+              type: object
+              properties:
+                href:
+                  type: string
+                  format: uri
+            info:
+              type: object
+              properties:
+                href:
+                  type: string
+                  format: uri
+    JsonApiEntrypoint:
+      type: object
+      description: JSON:API 1.0 entrypoint document.
+      properties:
+        jsonapi:
+          $ref: '#/components/schemas/JsonApiVersion'
+        data:
+          type: array
+          items:
+            type: object
+        links:
+          type: object
+          description: One member per exposed resource type, keyed "<entity_type>--<bundle>".
+          additionalProperties:
+            type: object
+            properties:
+              href:
+                type: string
+                format: uri
+    JsonApiErrorDocument:
+      type: object
+      required:
+      - errors
+      properties:
+        jsonapi:
+          $ref: '#/components/schemas/JsonApiVersion'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/JsonApiError'
     Linkset:
       type: object
       description: RFC 9264 linkset document.
@@ -94,36 +154,6 @@ components:
                         type: string
                     isProtected:
                       type: boolean
-    JsonApiError:
-      type: object
-      properties:
-        title:
-          type: string
-          examples:
-          - Bad Request
-        status:
-          type: string
-          examples:
-          - '400'
-        detail:
-          type: string
-          examples:
-          - Invalid nested filtering. The field `nope`, given in the path `nope`, does not exist.
-        links:
-          type: object
-          properties:
-            via:
-              type: object
-              properties:
-                href:
-                  type: string
-                  format: uri
-            info:
-              type: object
-              properties:
-                href:
-                  type: string
-                  format: uri
     JsonApiVersion:
       type: object
       properties:
@@ -134,36 +164,6 @@ components:
         meta:
           type: object
           additionalProperties: true
-    JsonApiEntrypoint:
-      type: object
-      description: JSON:API 1.0 entrypoint document.
-      properties:
-        jsonapi:
-          $ref: '#/components/schemas/JsonApiVersion'
-        data:
-          type: array
-          items:
-            type: object
-        links:
-          type: object
-          description: One member per exposed resource type, keyed "<entity_type>--<bundle>".
-          additionalProperties:
-            type: object
-            properties:
-              href:
-                type: string
-                format: uri
-    JsonApiErrorDocument:
-      type: object
-      required:
-      - errors
-      properties:
-        jsonapi:
-          $ref: '#/components/schemas/JsonApiVersion'
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/JsonApiError'
   responses:
     NotFound:
       description: 'No such resource. NOTE: an unknown resource TYPE under /api/v1 is answered by Drupal with an HTML 404 page rather than a JSON:API error document (observed 2026-09-12).'

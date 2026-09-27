@@ -125,6 +125,22 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    BadRequest:
+      description: Malformed query — for example an unknown filter field. Returned as a JSON:API error document.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/JsonApiErrorDocument'
+    NotFound:
+      description: 'No such resource. NOTE: an unknown resource TYPE under /api/v1 is answered by Drupal with an HTML 404 page rather than a JSON:API error document (observed 2026-09-12).'
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/JsonApiErrorDocument'
+        text/html:
+          schema:
+            type: string
   schemas:
     JsonApiError:
       type: object
@@ -156,16 +172,6 @@ components:
                 href:
                   type: string
                   format: uri
-    JsonApiVersion:
-      type: object
-      properties:
-        version:
-          type: string
-          examples:
-          - '1.0'
-        meta:
-          type: object
-          additionalProperties: true
     JsonApiErrorDocument:
       type: object
       required:
@@ -177,22 +183,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/JsonApiError'
-  responses:
-    BadRequest:
-      description: Malformed query — for example an unknown filter field. Returned as a JSON:API error document.
-      content:
-        application/vnd.api+json:
-          schema:
-            $ref: '#/components/schemas/JsonApiErrorDocument'
-    NotFound:
-      description: 'No such resource. NOTE: an unknown resource TYPE under /api/v1 is answered by Drupal with an HTML 404 page rather than a JSON:API error document (observed 2026-09-12).'
-      content:
-        application/vnd.api+json:
-          schema:
-            $ref: '#/components/schemas/JsonApiErrorDocument'
-        text/html:
-          schema:
-            type: string
+    JsonApiVersion:
+      type: object
+      properties:
+        version:
+          type: string
+          examples:
+          - '1.0'
+        meta:
+          type: object
+          additionalProperties: true
 externalDocs:
   description: JSON:API 1.0 specification (the contract this surface conforms to)
   url: https://jsonapi.org/format/1.0/
