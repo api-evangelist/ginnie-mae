@@ -60,36 +60,16 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    JsonApiError:
+    JsonApiVersion:
       type: object
       properties:
-        title:
+        version:
           type: string
           examples:
-          - Bad Request
-        status:
-          type: string
-          examples:
-          - '400'
-        detail:
-          type: string
-          examples:
-          - Invalid nested filtering. The field `nope`, given in the path `nope`, does not exist.
-        links:
+          - '1.0'
+        meta:
           type: object
-          properties:
-            via:
-              type: object
-              properties:
-                href:
-                  type: string
-                  format: uri
-            info:
-              type: object
-              properties:
-                href:
-                  type: string
-                  format: uri
+          additionalProperties: true
     Linkset:
       type: object
       description: RFC 9264 linkset document.
@@ -143,16 +123,6 @@ components:
               href:
                 type: string
                 format: uri
-    JsonApiVersion:
-      type: object
-      properties:
-        version:
-          type: string
-          examples:
-          - '1.0'
-        meta:
-          type: object
-          additionalProperties: true
     JsonApiErrorDocument:
       type: object
       required:
@@ -164,6 +134,36 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/JsonApiError'
+    JsonApiError:
+      type: object
+      properties:
+        title:
+          type: string
+          examples:
+          - Bad Request
+        status:
+          type: string
+          examples:
+          - '400'
+        detail:
+          type: string
+          examples:
+          - Invalid nested filtering. The field `nope`, given in the path `nope`, does not exist.
+        links:
+          type: object
+          properties:
+            via:
+              type: object
+              properties:
+                href:
+                  type: string
+                  format: uri
+            info:
+              type: object
+              properties:
+                href:
+                  type: string
+                  format: uri
   responses:
     NotFound:
       description: 'No such resource. NOTE: an unknown resource TYPE under /api/v1 is answered by Drupal with an HTML 404 page rather than a JSON:API error document (observed 2026-09-12).'

@@ -54,6 +54,27 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    JsonApiVersion:
+      type: object
+      properties:
+        version:
+          type: string
+          examples:
+          - '1.0'
+        meta:
+          type: object
+          additionalProperties: true
+    JsonApiErrorDocument:
+      type: object
+      required:
+      - errors
+      properties:
+        jsonapi:
+          $ref: '#/components/schemas/JsonApiVersion'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/JsonApiError'
     JsonApiError:
       type: object
       properties:
@@ -84,28 +105,13 @@ components:
                 href:
                   type: string
                   format: uri
-    JsonApiVersion:
-      type: object
-      properties:
-        version:
-          type: string
-          examples:
-          - '1.0'
-        meta:
-          type: object
-          additionalProperties: true
-    JsonApiErrorDocument:
-      type: object
-      required:
-      - errors
-      properties:
-        jsonapi:
-          $ref: '#/components/schemas/JsonApiVersion'
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/JsonApiError'
   responses:
+    BadRequest:
+      description: Malformed query — for example an unknown filter field. Returned as a JSON:API error document.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/JsonApiErrorDocument'
     NotFound:
       description: 'No such resource. NOTE: an unknown resource TYPE under /api/v1 is answered by Drupal with an HTML 404 page rather than a JSON:API error document (observed 2026-09-12).'
       content:
@@ -115,12 +121,6 @@ components:
         text/html:
           schema:
             type: string
-    BadRequest:
-      description: Malformed query — for example an unknown filter field. Returned as a JSON:API error document.
-      content:
-        application/vnd.api+json:
-          schema:
-            $ref: '#/components/schemas/JsonApiErrorDocument'
 externalDocs:
   description: JSON:API 1.0 specification (the contract this surface conforms to)
   url: https://jsonapi.org/format/1.0/
