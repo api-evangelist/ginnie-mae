@@ -431,6 +431,10 @@ apis:
   - type: RateLimits
     url: rate-limits/ginnie-mae-rate-limits.yml
 common:
+  - type: RateLimits
+    url: rate-limits/ginnie-mae-rate-limits.yml
+  - type: FinOps
+    url: finops/ginnie-mae-finops.yml
   - type: Overlay
     url: overlays/ginnie-mae-content-api-overlay.yaml
   - type: Website
