@@ -963,6 +963,25 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    JsonApiCollectionDocument:
+      type: object
+      properties:
+        jsonapi:
+          $ref: '#/components/schemas/JsonApiVersion'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceObject'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceObject'
+        links:
+          type: object
+          additionalProperties: true
+        meta:
+          type: object
+          additionalProperties: true
     JsonApiVersion:
       type: object
       properties:
@@ -973,6 +992,41 @@ components:
         meta:
           type: object
           additionalProperties: true
+    ResourceObject:
+      type: object
+      required:
+      - type
+      - id
+      properties:
+        type:
+          type: string
+          examples:
+          - node--press_releases
+        id:
+          type: string
+          format: uuid
+        links:
+          type: object
+          additionalProperties: true
+        relationships:
+          type: object
+          additionalProperties: true
+        attributes:
+          type: object
+          additionalProperties: true
+      additionalProperties: true
+      description: This site runs JSON:API Extras with field enhancement, so resource attributes are flattened onto the resource object rather than nested under an "attributes" member. Both shapes are permitted here because the flattened shape is what the live surface returns.
+    JsonApiErrorDocument:
+      type: object
+      required:
+      - errors
+      properties:
+        jsonapi:
+          $ref: '#/components/schemas/JsonApiVersion'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/JsonApiError'
     JsonApiItemDocument:
       type: object
       properties:
@@ -987,17 +1041,6 @@ components:
         links:
           type: object
           additionalProperties: true
-    JsonApiErrorDocument:
-      type: object
-      required:
-      - errors
-      properties:
-        jsonapi:
-          $ref: '#/components/schemas/JsonApiVersion'
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/JsonApiError'
     JsonApiError:
       type: object
       properties:
@@ -1028,56 +1071,7 @@ components:
                 href:
                   type: string
                   format: uri
-    ResourceObject:
-      type: object
-      required:
-      - type
-      - id
-      properties:
-        type:
-          type: string
-          examples:
-          - node--press_releases
-        id:
-          type: string
-          format: uuid
-        links:
-          type: object
-          additionalProperties: true
-        relationships:
-          type: object
-          additionalProperties: true
-        attributes:
-          type: object
-          additionalProperties: true
-      additionalProperties: true
-      description: This site runs JSON:API Extras with field enhancement, so resource attributes are flattened onto the resource object rather than nested under an "attributes" member. Both shapes are permitted here because the flattened shape is what the live surface returns.
-    JsonApiCollectionDocument:
-      type: object
-      properties:
-        jsonapi:
-          $ref: '#/components/schemas/JsonApiVersion'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceObject'
-        included:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceObject'
-        links:
-          type: object
-          additionalProperties: true
-        meta:
-          type: object
-          additionalProperties: true
   responses:
-    BadRequest:
-      description: Malformed query — for example an unknown filter field. Returned as a JSON:API error document.
-      content:
-        application/vnd.api+json:
-          schema:
-            $ref: '#/components/schemas/JsonApiErrorDocument'
     NotFound:
       description: 'No such resource. NOTE: an unknown resource TYPE under /api/v1 is answered by Drupal with an HTML 404 page rather than a JSON:API error document (observed 2026-09-12).'
       content:
@@ -1087,6 +1081,12 @@ components:
         text/html:
           schema:
             type: string
+    BadRequest:
+      description: Malformed query — for example an unknown filter field. Returned as a JSON:API error document.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/JsonApiErrorDocument'
     Forbidden:
       description: The requester may not read this resource. Returned as a JSON:API error document.
       content:

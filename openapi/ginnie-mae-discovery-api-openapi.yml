@@ -70,6 +70,36 @@ components:
         meta:
           type: object
           additionalProperties: true
+    JsonApiEntrypoint:
+      type: object
+      description: JSON:API 1.0 entrypoint document.
+      properties:
+        jsonapi:
+          $ref: '#/components/schemas/JsonApiVersion'
+        data:
+          type: array
+          items:
+            type: object
+        links:
+          type: object
+          description: One member per exposed resource type, keyed "<entity_type>--<bundle>".
+          additionalProperties:
+            type: object
+            properties:
+              href:
+                type: string
+                format: uri
+    JsonApiErrorDocument:
+      type: object
+      required:
+      - errors
+      properties:
+        jsonapi:
+          $ref: '#/components/schemas/JsonApiVersion'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/JsonApiError'
     Linkset:
       type: object
       description: RFC 9264 linkset document.
@@ -104,36 +134,6 @@ components:
                         type: string
                     isProtected:
                       type: boolean
-    JsonApiEntrypoint:
-      type: object
-      description: JSON:API 1.0 entrypoint document.
-      properties:
-        jsonapi:
-          $ref: '#/components/schemas/JsonApiVersion'
-        data:
-          type: array
-          items:
-            type: object
-        links:
-          type: object
-          description: One member per exposed resource type, keyed "<entity_type>--<bundle>".
-          additionalProperties:
-            type: object
-            properties:
-              href:
-                type: string
-                format: uri
-    JsonApiErrorDocument:
-      type: object
-      required:
-      - errors
-      properties:
-        jsonapi:
-          $ref: '#/components/schemas/JsonApiVersion'
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/JsonApiError'
     JsonApiError:
       type: object
       properties:
